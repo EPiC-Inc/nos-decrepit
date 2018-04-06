@@ -14,7 +14,7 @@ This is a web-based chat client that will be slowly evolving.
 `npm install --save express socket.io`
 
 # Starting server
-`node server.js [port]`
+`node server.js [port]`<br>
 [port] is optional, defaults to 80
 
 `npm test` to quickly start on port 8080
