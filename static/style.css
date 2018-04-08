@@ -15,6 +15,28 @@ button {
   padding: 10px;
   font-weight: bold;
   font-size: 20px;
+  border: 2px solid darkcyan;
+  transition-duration: .3s;
+}
+
+button:hover {
+  background: darkcyan;
+  color: cyan;
+}
+
+.center {
+  width: 100%;
+  text-align: center;
+}
+
+input {
+  border: 2px solid black;
+}
+
+.infobox {
+  border-radius: 10px;
+  height: 30px;
+  width: 200px;
 }
 
 h1 {

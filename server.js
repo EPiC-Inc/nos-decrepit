@@ -34,7 +34,24 @@ io.on('connection', function(socket){
 
   // Message upon joining a room and room switching script
   socket.on('switch', function(data){});
+
+  // Auth
+  socket.on('auth', function(data){
+    var user = data[0];
+    var pwd = data[1];
+    uData = authList[user];
+    console.log(data);
+    console.log(uData);
+    if (uData == undefined || uData.pass !== pwd) {
+      io.to(socket.id).emit('err', "Error: Username / password not recognized");
+    } else if (!uData.active) {
+      io.to(socket.id).emit('err', "Error: You have been banned!");
+    } else {
+      io.to(socket.id).emit('err', "Logging in...");
+    }
+  });
 });
+
 
 // Start the server
 http.listen(port, function(){
