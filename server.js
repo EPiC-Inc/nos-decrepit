@@ -8,8 +8,11 @@ var url = require('url');
 // Variables
 var cmdHelp = "?ping : see online users<br>?ping room : see users in your current room"
 var users = {};
+var authList = require('./users.json');
+//console.log(authList);
 
 // Set the port (node server.js [port])
+// process.argv : 0:program 1:file 2:(in this case)port
 if (process.argv[2] == undefined) {
   var port = 80;
 } else {
@@ -31,4 +34,9 @@ io.on('connection', function(socket){
 
   // Message upon joining a room and room switching script
   socket.on('switch', function(data){});
+});
+
+// Start the server
+http.listen(port, function(){
+  console.log('Listening on port:'+port);
 });
