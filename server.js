@@ -66,7 +66,7 @@ io.on('connection', function(socket){
   socket.on("message", function(data){
     if (users[socket.id] !== undefined) {
       if (data.startsWith("?")) {
-        if (data.startsWith("?adduser ")) {
+        if (data.startsWith("?adduser ") && authList[senderName]['admin']) {
           splitData = data.split(" ");
           newUser = {
             "active":true,
@@ -75,11 +75,22 @@ io.on('connection', function(socket){
             "pass":splitData[2]
           };
           authList[splitData[1]] = newUser;
+          // Write to users.json
           content = JSON.stringify(authList);
           fs.writeFile("users.json", content, 'utf8', function (err) {
-            if (err) {return console.log(err);}
-            console.log("The file was saved!");
-          });
+            if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully added!");}
+            console.log("The file was saved!");});
+        } else if (data.startsWith("?rmuser ") && authList[senderName]['admin']){ 
+          splitData = data.split(" ");
+          if (authList[splitData[1]] == undefined) {
+            io.to(socket.id).emit('message', "> User not found!");
+          } else {
+            delete authList[splitData[1]];
+            content = JSON.stringify(authList);
+            fs.writeFile("users.json", content, 'utf8', function (err) {
+              if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully removed!");}
+              console.log("The file was saved!");});
+          }
         }
       }
       var senderName = users[socket.id].name;
