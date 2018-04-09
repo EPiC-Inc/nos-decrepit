@@ -77,14 +77,16 @@ io.on('connection', function(socket){
 
   // User querying
   socket.on('query', function(){
-    var rep = [];
-    var cRoom = users[socket.id].room;
-    for (id in users) {
-      if (users[id].room == cRoom) {
-        rep.push(users[id].name);
+    if (users[socket.id] !== undefined) {
+      var rep = [];
+      var cRoom = users[socket.id].room;
+      for (id in users) {
+        if (users[id].room == cRoom) {
+          rep.push(users[id].name);
+        }
       }
+      io.to(socket.id).emit('users online', rep);
     }
-    io.to(socket.id).emit('users online', rep);
   });
 });
 
