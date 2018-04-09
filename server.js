@@ -31,10 +31,10 @@ io.on('connection', function(socket){
   // Message upon disconnection
   socket.on('disconnect', function(){
     if (users[socket.id] !== undefined) {
-      header='';
+      header='> User';
       if (authList[users[socket.id].name]['admin']) {
-        header = "<img src='/static/admin.png'> "}
-      io.to(users[socket.id].room).emit('message', "> User ["+header+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left");
+        header = "> Admin "}
+      io.to(users[socket.id].room).emit('message', header+"[<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left");
       delete users[socket.id];
     }
   });
@@ -48,8 +48,8 @@ io.on('connection', function(socket){
     socket.join(data[1]);
     header='';
     if (authList[data[0]]['admin']) {
-      header = "<img src='/static/admin.png'> "}
-    io.to(data[1]).emit('message', "> User ["+header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
+      header = "> Admin "}
+    io.to(data[1]).emit('message', header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
   });
 
   // Auth
