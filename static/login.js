@@ -39,7 +39,7 @@ function login() {
   username = usr.value;
   password = hashCode(pwd.value);
   console.log("test");
-  socket.emit('auth', [username, password])
+  socket.emit('auth', [username, password]);
 }
 
 // Upon page load:
@@ -51,4 +51,11 @@ if (getCookie("user") != "") {
 socket.on('err', function(data){
   document.getElementById("errors").innerHTML = data;
   console.log('err : '+data);
+  pwd.value='';
+});
+
+socket.on('a-ok', function(){
+  document.cookie='user='+username;
+  document.cookie='key='+password;
+  window.location.replace("/static/coms.html");
 });

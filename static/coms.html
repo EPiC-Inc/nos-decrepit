@@ -2,8 +2,23 @@
 <html>
 <head>
   <title id='title'>NOS</title>
+  <link rel="shortcut icon" type="image/png" href="/static/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 </head>
 
 <body>
+  <header>
+    <h1 id='roomName'></h1>
+  </header>
+  <div style='height:50px;'></div>
+
+  <div id='messages'>
+  </div>
+  <form onsubmit="return false">
+    <input id='messageSender' autocomplete="off" /><button onclick="sendMsg()">Send</button>
+  </form>
 </body>
+<script src='/static/chat.js'></script>
 </html>

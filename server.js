@@ -29,25 +29,41 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   // Message upon disconnection
   socket.on('disconnect', function(){
-    //
+    delete users[socket.id];
   });
 
   // Message upon joining a room and room switching script
-  socket.on('switch', function(data){});
+  socket.on('join', function(data){
+    users[socket.id] = {
+      name:data[0],
+      room:data[1]
+    };
+    socket.join(data[1]);
+  });
 
   // Auth
   socket.on('auth', function(data){
     var user = data[0];
     var pwd = data[1];
-    uData = authList[user];
-    console.log(data);
-    console.log(uData);
+    var uData = authList[user];
+    //console.log(data);
+    //console.log(uData);
     if (uData == undefined || uData.pass !== pwd) {
       io.to(socket.id).emit('err', "Error: Username / password not recognized");
     } else if (!uData.active) {
       io.to(socket.id).emit('err', "Error: You have been banned!");
     } else {
-      io.to(socket.id).emit('err', "Logging in...");
+      io.to(socket.id).emit('a-ok');
+    }
+  });
+
+  // Message sending script allowing for username colors
+  socket.on("message", function(data){
+    if (users[socket.id] !== undefined) {
+      var senderName = users[socket.id].name;
+      // Graft together an unnecessarily complicated packet =)
+      var packet = "[<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
+      io.to(users[socket.id].room).emit('message', packet);
     }
   });
 });
