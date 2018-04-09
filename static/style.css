@@ -45,7 +45,7 @@ h1 {
 
 header {
   background: #33ccff;
-  position: absolute;
+  position: fixed;
   width: 100%;
 }
 
