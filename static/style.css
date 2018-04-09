@@ -58,3 +58,24 @@ header div {
 header div:last-child {
   float: right;
 }
+
+.msgSender {
+  background: white;
+  padding: 3px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.msgSender input {
+  border: 0;
+  padding: 10px;
+  width: 90%;
+  margin-right: .5%;
+}
+
+.msgSender button {
+  width: 9%;
+  border: none;
+  padding: 10px;
+}
