@@ -69,7 +69,7 @@ io.on('connection', function(socket){
       if (data.startsWith("?")) {
         if (data.startsWith("?adduser ") && authList[senderName]['admin']) {
           splitData = data.split(" ");
-          if (splitData.length > 2 && !isNaN(splitData[2]) && !authList.includes(splitData[1])) {
+          if (splitData.length > 2 && !isNaN(splitData[2]) && authList[splitData[1]] == undefined) {
             newUser = {
               "active":true,
               "admin":false,
