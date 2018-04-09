@@ -32,7 +32,7 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     if (users[socket.id] !== undefined) {
       header='';
-      if (authList[senderName]['admin']) {
+      if (authList[users[socket.id].name]['admin']) {
         header = "<img src='/static/admin.png'> "}
       io.to(users[socket.id].room).emit('message', "> User ["+header+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left");
       delete users[socket.id];
