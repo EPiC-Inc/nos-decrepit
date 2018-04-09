@@ -33,7 +33,7 @@ io.on('connection', function(socket){
     if (users[socket.id] !== undefined) {
       header='> User';
       if (authList[users[socket.id].name]['admin']) {
-        header = "> Admin "}
+        header = "> Admin <img src='/static/admin.png'> "}
       io.to(users[socket.id].room).emit('message', header+"[<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left");
       delete users[socket.id];
     }
@@ -48,7 +48,7 @@ io.on('connection', function(socket){
     socket.join(data[1]);
     header='';
     if (authList[data[0]]['admin']) {
-      header = "> Admin "}
+      header = "> Admin <img src='/static/admin.png'> "}
     io.to(data[1]).emit('message', header+"[<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
   });
 
