@@ -85,10 +85,6 @@ header .right {
   margin-right: .5%;
 }
 
-td {
-  position: absolute;
-}
-
 .msgSender button {
   width: 9%;
   border: none;
@@ -98,6 +94,7 @@ td {
 #menu {
   background: lightcyan;
   max-width: 100px;
+  position: absolute;
 }
 
 #messages div {
