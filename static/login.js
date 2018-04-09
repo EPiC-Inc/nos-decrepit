@@ -43,8 +43,8 @@ function login() {
 }
 
 // Upon page load:
-if (getCookie("user") != "") {
-  login();
+if (getCookie("user") != "" && getCookie("user") !== undefined) {
+  socket.emit(getCookie("user"), getCookie("key"));
 }
 
 // Callbacks
