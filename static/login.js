@@ -44,7 +44,7 @@ function login() {
 
 // Upon page load:
 if (getCookie("user") != "" && getCookie("user") !== undefined) {
-  socket.emit(getCookie("user"), getCookie("key"));
+  socket.emit('auth', [getCookie("user"), getCookie("key")]);
 }
 
 // Callbacks
