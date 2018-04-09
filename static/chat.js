@@ -51,7 +51,7 @@ function sendMsg() {
 }
 
 // On page load
-console.log(getCookie('user'));
+//console.log(getCookie('user'));
 if (getCookie('user') !== "" && getCookie('user') !== undefined) {
   socket.emit('auth', [getCookie("user"), parseInt(getCookie("key"))]);
 }
