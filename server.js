@@ -121,6 +121,18 @@ io.on('connection', function(socket){
       io.to(socket.id).emit('users online', rep);
     }
   });
+  
+  // Log a new user account request
+  socket.on('new user', function(data){
+    if (data[0] == '' || data[1] == 0) {
+      io.to(socket.id).emit('err', "Error: Username / password can not be blank!");
+    } else if (authList[data[0]] !== undefined) {
+      io.to(socket.id).emit('err', "Error: Username already in use!");
+    } else {
+      console.log("New account request:"+data[0]+" "+data[1]);
+      io.to(socket.id).emit('err', "Success! Your account has been requested for creation. It may take some time to manually activate.");
+    }
+  });
 });
 
 
