@@ -68,7 +68,6 @@ header div:last-child {
 }
 
 .msgSender input {
-  border: 0;
   padding: 10px;
   width: 90%;
   margin-right: .5%;
