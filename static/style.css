@@ -86,7 +86,7 @@ header .right {
 }
 
 td {
-  position: static;
+  position: absolute;
 }
 
 .msgSender button {
