@@ -7,6 +7,16 @@
   box-sizing: border-box
 }
 
+a {
+  transition-duration: 0.4s;
+  color: #00ccff;
+}
+
+a:hover {
+  color: #000066;
+  background: #00ccff;
+}
+
 body {
   font: 15px Roboto Mono, monospace;
   background: white;
