@@ -74,7 +74,7 @@ io.on('connection', function(socket){
               "active":true,
               "admin":false,
               "nameStyle":"",
-              "pass":splitData[2]
+              "pass":parseInt(splitData[2])
             };
             authList[splitData[1]] = newUser;
             // Write to users.json
