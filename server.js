@@ -43,7 +43,7 @@ io.on('connection', function(socket){
       room:data[1]
     };
     socket.join(data[1]);
-    io.to(data[1]).emit('message', "> User ["+data[0]+"] has joined!")
+    io.to(data[1]).emit('message', "> User ["+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] has joined!");
   });
 
   // Auth
