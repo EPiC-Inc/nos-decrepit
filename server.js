@@ -64,6 +64,18 @@ io.on('connection', function(socket){
   // Message sending script allowing for username colors
   socket.on("message", function(data){
     if (users[socket.id] !== undefined) {
+      if (data.startsWith("?")) {
+        if (data.startsWith("?adduser ")) {
+          splitData = data.split(" ");
+          newUser = {
+            "active":true,
+            "admin":false,
+            "nameStyle":"",
+            "pass":data[2]
+          };
+          authList[data[1]] = newUser;
+        }
+      }
       var senderName = users[socket.id].name;
       var header = '';
       if (authList[senderName]['admin']) {
