@@ -29,7 +29,10 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   // Message upon disconnection
   socket.on('disconnect', function(){
-    delete users[socket.id];
+    if (users[socket.id] !== undefined) {
+      io.to(users[socket.id].room).emit('message', "> User ["+users[socket.id].name+"] has left")
+      delete users[socket.id];
+    }
   });
 
   // Message upon joining a room and room switching script
@@ -39,6 +42,7 @@ io.on('connection', function(socket){
       room:data[1]
     };
     socket.join(data[1]);
+    io.to(data[1]).emit('message', "> User ["+data[0]+"] has joined!")
   });
 
   // Auth
@@ -63,7 +67,7 @@ io.on('connection', function(socket){
       var senderName = users[socket.id].name;
       var header = '';
       if (authList[senderName]['admin']) {
-        header = "<img src='/static/admin.png'>"
+        header = "<img src='/static/admin.png'> "
       }
       // Graft together an unnecessarily complicated packet =)
       var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
