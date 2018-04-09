@@ -33,6 +33,16 @@ function getCookie(cname) {
     return "";
 }
 
+var rmCookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
+function logout() {
+  rmCookie('user');
+  rmCookie('key');
+  window.location.replace("/");
+}
+
 function sendMsg() {
   if (room !== undefined && m.value.trim() !== '') {
     socket.emit('message', m.value);
@@ -54,6 +64,7 @@ socket.on('err', function(data){
 
 socket.on('a-ok', function(){
   console.log("A-OK recieved!");
+  document.getElementById("logout").hidden = false;
   room = getUrlVars()['room'];
   if (room == undefined) {room = 'lobby';}
   //console.log(room);

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +8,7 @@
 }
 
 body {
-  font: 15px monospace;
+  font: 15px Roboto Mono, monospace;
   background: white;
 }
 
@@ -19,9 +21,18 @@ button {
   transition-duration: .3s;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  padding-left: 10px;
+}
+
 button:hover {
   background: darkcyan;
   color: cyan;
+}
+
+li {
+  font-size: 20px;
+  padding-left: 20px;
 }
 
 .center {
@@ -31,6 +42,7 @@ button:hover {
 
 input {
   border: 2px solid black;
+  font-size: 18px;
 }
 
 .infobox {
@@ -55,7 +67,7 @@ header div {
   text-align: center;
 }
 
-header div:last-child {
+header .right {
   float: right;
 }
 
