@@ -61,8 +61,12 @@ io.on('connection', function(socket){
   socket.on("message", function(data){
     if (users[socket.id] !== undefined) {
       var senderName = users[socket.id].name;
+      var header = '';
+      if (authList[senderName]['admin']) {
+        header = "<img src='/static/admin.png'>"
+      }
       // Graft together an unnecessarily complicated packet =)
-      var packet = "[<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
+      var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
       io.to(users[socket.id].room).emit('message', packet);
     }
   });
