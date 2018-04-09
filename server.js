@@ -72,9 +72,9 @@ io.on('connection', function(socket){
             "active":true,
             "admin":false,
             "nameStyle":"",
-            "pass":data[2]
+            "pass":splitData[2]
           };
-          authList[data[1]] = newUser;
+          authList[splitData[1]] = newUser;
           content = JSON.stringify(authList);
           fs.writeFile("users.json", content, 'utf8', function (err) {
             if (err) {return console.log(err);}
