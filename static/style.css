@@ -12,6 +12,10 @@ body {
   background: white;
 }
 
+table {
+  width: 100%;
+}
+
 button {
   background: cyan;
   padding: 10px;
@@ -103,4 +107,5 @@ header .right {
 
 #messages div {
   font-size: 20px;
+  width: 100%;
 }
