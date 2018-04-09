@@ -1,4 +1,4 @@
-# nos-alpha
+# NOrSe (Formerly NOS-ALPHA)
 
 This is a web-based chat client that will be slowly evolving.
 
