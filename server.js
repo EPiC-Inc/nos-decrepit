@@ -49,7 +49,7 @@ io.on('connection', function(socket){
     header='';
     if (authList[data[0]]['admin']) {
       header = "> Admin "}
-    io.to(data[1]).emit('message', header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
+    io.to(data[1]).emit('message', header+"[<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
   });
 
   // Auth
