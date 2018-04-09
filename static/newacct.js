@@ -4,6 +4,7 @@ var socket = io();
 // Variables
 var usr = document.getElementById("username");
 var pwd = document.getElementById("password");
+var cPwd = document.getElementById("confPassword");
 var username = '';
 var password = '';
 
@@ -36,10 +37,14 @@ function getCookie(cname) {
 }
 
 function newAcct() {
-  username = usr.value;
-  password = hashCode(pwd.value);
-  console.log("test");
-  socket.emit('new user', [username, password]);
+  if (pwd.value == cPwd.value) {
+    username = usr.value;
+    password = hashCode(pwd.value);
+    console.log("test");
+    socket.emit('new user', [username, password]);
+  } else {
+    document.getElementById("errors").innerHTML = "Error: Both passwords must match!";
+  }
 }
 
 // Callbacks
