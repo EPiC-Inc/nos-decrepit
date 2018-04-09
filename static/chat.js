@@ -51,9 +51,9 @@ function sendMsg() {
 }
 
 // On page load
+console.log(getCookie('user'));
 if (getCookie('user') !== "" && getCookie('user') !== undefined) {
-  username = getCookie('user');
-  socket.emit('auth', [username, parseInt(getCookie('key'))]);
+  socket.emit('auth', [getCookie("user"), parseInt(getCookie("key"))]);
 }
 
 // Callbacks
@@ -68,7 +68,7 @@ socket.on('a-ok', function(){
   room = getUrlVars()['room'];
   if (room == undefined) {room = 'lobby';}
   //console.log(room);
-  socket.emit('join', [username, room]);
+  socket.emit('join', [getCookie("user"), room]);
   document.getElementById("roomName").innerHTML = "Room : "+room;
 });
 

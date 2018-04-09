@@ -44,6 +44,8 @@ function login() {
 
 // Upon page load:
 if (getCookie("user") != "" && getCookie("user") !== undefined) {
+  username = getCookie("user");
+  password = getCookie("key");
   socket.emit('auth', [getCookie("user"), parseInt(getCookie("key"))]);
 }
 
