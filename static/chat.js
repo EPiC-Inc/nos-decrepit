@@ -11,6 +11,35 @@ var room = '';
 var menuOpen = false;
 
 //Functions
+//Change favicon
+function changeIco(ref) {
+    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = ref;
+    document.getElementsByTagName('head')[0].appendChild(link);
+}
+
+// See if the page is visible (for favicon changing)
+var vis = (function(){
+    var stateKey, eventKey, keys = {
+        hidden: "visibilitychange",
+        webkitHidden: "webkitvisibilitychange",
+        mozHidden: "mozvisibilitychange",
+        msHidden: "msvisibilitychange"
+    };
+    for (stateKey in keys) {
+        if (stateKey in document) {
+            eventKey = keys[stateKey];
+            break;
+        }
+    }
+    return function(c) {
+        if (c) document.addEventListener(eventKey, c);
+        return !document[stateKey];
+    }
+})();
+
 function getUrlVars() {
     var vars = {};
     var parts = window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -78,6 +107,11 @@ if (getCookie('user') !== "" && getCookie('user') !== undefined) {
 }
 
 // Callbacks
+vis(function(){
+    if (vis()) {changeIco('/static/favicon.png');}
+    //changeIco(vis() ? '/static/favicon.png' : '/static/alert.png');
+});
+
 // Error logging
 socket.on('err', function(data){
   console.log(data);
@@ -105,6 +139,7 @@ socket.on("message", function(data){
   // console.log(data);
   var start='<div>'
   if (data.includes('@'+username)) {
+    if (!vis()) {changeIco('/static/alert.png');}
     start = '<div class="alert">';
   }
   messages.innerHTML += start+data+"</div>";
