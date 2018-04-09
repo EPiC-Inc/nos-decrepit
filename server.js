@@ -7,7 +7,7 @@ var url = require('url');
 var fs = require('fs');
 
 // Variables
-var cmdHelp = "?ping : see online users<br>?ping room : see users in your current room"
+var cmdHelp = "?adduser [user] [hash]: Adds a user<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg under _System"
 var users = {};
 var authList = require('./users.json');
 //console.log(authList);
@@ -31,7 +31,10 @@ io.on('connection', function(socket){
   // Message upon disconnection
   socket.on('disconnect', function(){
     if (users[socket.id] !== undefined) {
-      io.to(users[socket.id].room).emit('message', "> User ["+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left");
+      header='';
+      if (authList[senderName]['admin']) {
+        header = "<img src='/static/admin.png'> "}
+      io.to(users[socket.id].room).emit('message', "> User ["+header+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left");
       delete users[socket.id];
     }
   });
@@ -43,7 +46,10 @@ io.on('connection', function(socket){
       room:data[1]
     };
     socket.join(data[1]);
-    io.to(data[1]).emit('message', "> User ["+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
+    header='';
+    if (authList[data[0]]['admin']) {
+      header = "<img src='/static/admin.png'> "}
+    io.to(data[1]).emit('message', "> User ["+header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
   });
 
   // Auth
@@ -64,6 +70,7 @@ io.on('connection', function(socket){
 
   // Message sending script allowing for username colors
   socket.on("message", function(data){
+    var send = true;
     if (users[socket.id] !== undefined) {
       var senderName = users[socket.id].name;
       if (data.startsWith("?")) {
@@ -83,7 +90,7 @@ io.on('connection', function(socket){
               if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully added!");}
               console.log("The file was saved!");});
           }
-        } else if (data.startsWith("?rmuser ") && authList[senderName]['admin']){ 
+        } else if (data.startsWith("?rmuser ") && authList[senderName]['admin']){
           splitData = data.split(" ");
           if (splitData.length > 1) {
             if (authList[splitData[1]] == undefined) {
@@ -93,18 +100,22 @@ io.on('connection', function(socket){
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
                 if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully removed!");}
-                console.log("The file was saved!");});
-            }
-          }
+                console.log("The file was saved!");});}}
+        } else if (data.startsWith("?broadcast ") {
+          send = false;
+          var packet = "<span style='background:cyan;'>[_System] "+data.substring(11)+"</span>";
+          socket.emit("message", packet);
         }
       }
-      var header = '';
-      if (authList[senderName]['admin']) {
-        header = "<img src='/static/admin.png'> "
+      if (send) {
+        var header = '';
+        if (authList[senderName]['admin']) {
+          header = "<img src='/static/admin.png'> "}
+
+        // Graft together an unnecessarily complicated packet =)
+        var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
+        io.to(users[socket.id].room).emit('message', packet);
       }
-      // Graft together an unnecessarily complicated packet =)
-      var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
-      io.to(users[socket.id].room).emit('message', packet);
     }
   });
 
@@ -121,7 +132,7 @@ io.on('connection', function(socket){
       io.to(socket.id).emit('users online', rep);
     }
   });
-  
+
   // Log a new user account request
   socket.on('new user', function(data){
     if (data[0] == '' || data[1] == 0) {
