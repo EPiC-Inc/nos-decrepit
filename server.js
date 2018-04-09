@@ -31,7 +31,7 @@ io.on('connection', function(socket){
   // Message upon disconnection
   socket.on('disconnect', function(){
     if (users[socket.id] !== undefined) {
-      io.to(data[1]).emit('message', "> User ["+"<span style='"+authList[data[0]]['nameStyle']+"'>"+senderName+"</span>] has left");
+      io.to(data[1]).emit('message', "> User ["+"<span style='"+authList[data[0]]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left");
       delete users[socket.id];
     }
   });
@@ -43,7 +43,7 @@ io.on('connection', function(socket){
       room:data[1]
     };
     socket.join(data[1]);
-    io.to(data[1]).emit('message', "> User ["+"<span style='"+authList[data[0]]['nameStyle']+"'>"+senderName+"</span>] has joined!");
+    io.to(data[1]).emit('message', "> User ["+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
   });
 
   // Auth
