@@ -4,5 +4,23 @@
 </head>
 
 <body>
+  <header>
+    <div><h1>Sign Up</h1></div>
+    <div class='right'><a href='/'><button>Home</button></a></div>
+  </header>
+  <div style='height:100px;'></div>
+
+  <h3 id='errors' class='center' style='color:red;'></h3>
+  <br /><br />
+  <form onsubmit="return false" class='center'>
+    <p>Username:</p>
+    <input class='infobox' id="username"> <br /><br />
+    <p>Password:</p>
+    <input class='infobox' type="password" id="password"> <br /><br />
+    <button onclick="login()">Log In</button>
+  </form>
+  <br /><br />
+  <a href='/static/login.html'><h3 class='center'>Log In</h3></a>
+  <script src='/static/newacct.js'></script>
 </body>
 </html>
