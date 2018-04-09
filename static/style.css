@@ -85,6 +85,10 @@ header .right {
   margin-right: .5%;
 }
 
+td {
+  position: static;
+}
+
 .msgSender button {
   width: 9%;
   border: none;
