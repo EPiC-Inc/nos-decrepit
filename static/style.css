@@ -102,7 +102,7 @@ header .right {
 #menu {
   background: lightcyan;
   max-width: 100px;
-  position: absolute;
+  position: fixed;
 }
 
 #messages div {
