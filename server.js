@@ -4,6 +4,7 @@ var app = express()
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var url = require('url');
+var fs = require('fs');
 
 // Variables
 var cmdHelp = "?ping : see online users<br>?ping room : see users in your current room"
@@ -74,6 +75,11 @@ io.on('connection', function(socket){
             "pass":data[2]
           };
           authList[data[1]] = newUser;
+          content = JSON.stringify(authList);
+          fs.writeFile("users.json", content, 'utf8', function (err) {
+            if (err) {return console.log(err);}
+            console.log("The file was saved!");
+          });
         }
       }
       var senderName = users[socket.id].name;
