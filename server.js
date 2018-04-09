@@ -101,7 +101,7 @@ io.on('connection', function(socket){
               fs.writeFile("users.json", content, 'utf8', function (err) {
                 if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully removed!");}
                 console.log("The file was saved!");});}}
-        } else if (data.startsWith("?broadcast ") {
+        } else if (data.startsWith("?broadcast ")) {
           send = false;
           var packet = "<span style='background:cyan;'>[_System] "+data.substring(11)+"</span>";
           socket.emit("message", packet);
