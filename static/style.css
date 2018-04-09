@@ -78,3 +78,7 @@ header div:last-child {
   border: none;
   padding: 10px;
 }
+
+#messages div {
+  font-size: 16px;
+}
