@@ -104,7 +104,7 @@ socket.on("message", function(data){
   // Add message
   // console.log(data);
   var start='<div>'
-  if (data.includes('@'+username) {
+  if (data.includes('@'+username)) {
     start = '<div class="alert">';
   }
   messages.innerHTML += start+data+"</div>";
