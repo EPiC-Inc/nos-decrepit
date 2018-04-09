@@ -74,6 +74,7 @@ function changeRoom() {
 //console.log(getCookie('user'));
 if (getCookie('user') !== "" && getCookie('user') !== undefined) {
   socket.emit('auth', [getCookie("user"), parseInt(getCookie("key"))]);
+  var username = getCookie("user");
 }
 
 // Callbacks
@@ -102,6 +103,10 @@ socket.on('users online', function(data){
 socket.on("message", function(data){
   // Add message
   // console.log(data);
-  messages.innerHTML += "<div>"+data+"</div>";
+  var start='<div>'
+  if (data.includes('@'+username) {
+    start = '<div class="alert">';
+  }
+  messages.innerHTML += start+data+"</div>";
   window.scrollTo(0,document.body.scrollHeight);
 });
