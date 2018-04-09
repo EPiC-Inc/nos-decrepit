@@ -71,6 +71,10 @@ header .right {
   float: right;
 }
 
+.alert {
+  background: red;
+}
+
 .msgSender {
   background: white;
   padding: 3px;
