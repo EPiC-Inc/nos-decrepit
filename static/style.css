@@ -91,6 +91,11 @@ header .right {
   padding: 10px;
 }
 
+#menu {
+  background: lightcyan;
+  max-width: 100px;
+}
+
 #messages div {
   font-size: 20px;
 }

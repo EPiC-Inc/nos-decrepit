@@ -4,9 +4,11 @@ var socket=io();
 // Document elements
 var messages = document.getElementById("messages");
 var m = document.getElementById("messageSender");
+var users = document.getElementById("onlineUsers");
 
 // Variables
 var room = '';
+var menuOpen = false;
 
 //Functions
 function getUrlVars() {
@@ -50,6 +52,24 @@ function sendMsg() {
   }
 }
 
+function menu() {
+  menuOpen = !menuOpen;
+  if (menuOpen) {
+    socket.emit('query');
+    document.getElementById("menuBtn").innerHTML = 'X';
+    document.getElementById("menu").hidden = false;
+  } else {
+    document.getElementById("menuBtn").innerHTML = 'Ξ';
+    document.getElementById("menu").hidden = true;
+  }
+}
+
+function changeRoom() {
+  var toGo = document.getElementById('roomSelect').value;
+  if (toGo == '' || toGo == undefined) {toGo = 'lobby';}
+  window.location.href = '/static/coms.html?room='+toGo;
+}
+
 // On page load
 //console.log(getCookie('user'));
 if (getCookie('user') !== "" && getCookie('user') !== undefined) {
@@ -70,6 +90,13 @@ socket.on('a-ok', function(){
   //console.log(room);
   socket.emit('join', [getCookie("user"), room]);
   document.getElementById("roomName").innerHTML = "Room : "+room;
+});
+
+socket.on('users online', function(data){
+  users.innerHTML = '';
+  for (i in data) {
+    users.innerHTML += '<div>'+data[i]+'</div>';
+  }
 });
 
 socket.on("message", function(data){
