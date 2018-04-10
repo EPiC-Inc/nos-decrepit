@@ -7,7 +7,7 @@ var url = require('url');
 var fs = require('fs');
 
 // Variables
-var cmdHelp = "?adduser [user] [hash]: Adds a user<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg under _System<br>?ban [user] : Bans a user from the chat"
+var cmdHelp = "?adduser [user] [hash] : Adds a user<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg under _System<br>?ban [user] : Bans a user from the chat"
 var users = {};
 var authList = require('./users.json');
 //console.log(authList);
