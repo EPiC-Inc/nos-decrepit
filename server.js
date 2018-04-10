@@ -100,7 +100,9 @@ io.on('connection', function(socket){
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
                 if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully removed!");}
-                console.log(splitData[1]+" was removed!");});}}
+                console.log(splitData[1]+" was removed!");});
+            }
+          }
         } else if (data.startsWith("?broadcast ") && authList[senderName]['admin']) {
           send = false;
           var packet = "<span style='background:cyan;'>[_System] "+data.substring(11)+"</span>";
@@ -117,7 +119,8 @@ io.on('connection', function(socket){
               content = JSON.stringify(authList);
               //fs.writeFile("users.json", content, 'utf8', function (err) {
                 //if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully promoted!");}
-                //console.log(splitData[1]+" was promoted!");});}
+                //console.log(splitData[1]+" was promoted!");});
+            }
 
         } else if (data.startsWith("?demote ") && authList[senderName]['admin']) {
           // Demote
