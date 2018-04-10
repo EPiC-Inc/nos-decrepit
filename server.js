@@ -93,7 +93,7 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?rmuser ") && authList[senderName]['admin']){
           splitData = data.split(" ");
           if (splitData.length > 1) {
-            if (authList[splitData[1]] == undefined || authList[splitData[1]] !== "_System") {
+            if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
               io.to(socket.id).emit('message', "> User not found!");
             } else {
               delete authList[splitData[1]];
@@ -113,7 +113,7 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?promote ") && authList[senderName]['admin']) {
           // Promote
           splitData = data.split(" ");
-          if (authList[splitData[1]] == undefined || authList[splitData[1]] !== "_System") {
+          if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
               io.to(socket.id).emit('message', "> User not found!");
             } else {
               authList[splitData[1]]['admin'] = true;
