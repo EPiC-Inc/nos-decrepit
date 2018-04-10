@@ -116,7 +116,6 @@ io.on('connection', function(socket){
                 fs.writeFile("users.json", content, 'utf8', function (err) {
                   if (err) {return console.log(err);} else {io.to(users[socket.id].room).emit('message', "> User successfully banned!");}
                   console.log("The file was saved!");});}
-              }
             }
           }
         }
