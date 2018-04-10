@@ -112,6 +112,7 @@ io.on('connection', function(socket){
         // Promotion / demotion / ban code
         } else if (data.startsWith("?promote ") && authList[senderName]['admin']) {
           // Promote
+          splitData = data.split(" ");
           if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
               io.to(socket.id).emit('message', "> User not found!");
             } else {
