@@ -148,6 +148,18 @@ io.on('connection', function(socket){
                 if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully banned!");}
                 console.log(splitData[1]+" was banned!!!");});
             }
+        } else if (data.startsWith("?unban ") && authList[senderName]['admin']) {
+          // Un-ban
+          splitData = data.split(" ");
+          if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
+              io.to(socket.id).emit('message', "> User not found!");
+            } else {
+              authList[splitData[1]]['active'] = true;
+              content = JSON.stringify(authList);
+              fs.writeFile("users.json", content, 'utf8', function (err) {
+                if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully unbanned!");}
+                console.log(splitData[1]+" was unbanned!");});
+            }
         }
       }
       if (send) {
