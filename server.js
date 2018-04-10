@@ -180,7 +180,7 @@ io.on('connection', function(socket){
 
         // Graft together an unnecessarily complicated packet =)
         var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
-        io.to(users[socket.id].room).emit('message', packet);
+        if(users[socket.id] !== undefined) {io.to(users[socket.id].room).emit('message', packet);}
       }
     }
   });
