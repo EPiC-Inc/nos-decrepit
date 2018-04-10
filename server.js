@@ -94,7 +94,7 @@ io.on('connection', function(socket){
           // Remove a user
           splitData = data.split(" ");
           if (splitData.length > 1) {
-            if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
+            if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
               io.to(socket.id).emit('message', "> User not found!");
             } else {
               for (key in users) {
