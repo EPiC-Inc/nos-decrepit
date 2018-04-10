@@ -59,7 +59,7 @@ io.on('connection', function(socket){
     var uData = authList[user];
     //console.log(data);
     //console.log(uData);
-    if (!uData.active) {
+    if (uData !== undefined && !uData.active) {
       io.to(socket.id).emit('err', "Error: You have been banned!");
     } else if (uData == undefined || uData.pass !== pwd) {
       io.to(socket.id).emit('err', "Error: Username / password not recognized");
