@@ -108,16 +108,7 @@ io.on('connection', function(socket){
         } else if (data == '?help' && authList[senderName]['admin']) {
           io.to(socket.id).emit('message', cmdHelp);
         } else if (data.startsWith("?ban ") && authList[senderName]['admin']){
-          splitData = data.split(" ");
-          if (splitData.length > 1) {
-            if (authList[splitData[1]] !== undefined) {
-              authList[splitData[1]]['active'] = false;
-              content = JSON.stringify(authList);
-                fs.writeFile("users.json", content, 'utf8', function (err) {
-                  if (err) {return console.log(err);} else {io.to(users[socket.id].room).emit('message', "> User successfully banned!");}
-                  console.log("The file was saved!");});}
-            }
-          }
+
         }
       }
       if (send) {
