@@ -31,7 +31,7 @@ io.on('connection', function(socket){
   // Message upon disconnection
   socket.on('disconnect', function(){
     if (users[socket.id] !== undefined) {
-      header='> User';
+      header='> User [';
       if (authList[users[socket.id].name]['admin']) {
         header = "> Admin [<img src='/static/admin.png'> "}
       io.to(users[socket.id].room).emit('message', header+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left");
@@ -46,7 +46,7 @@ io.on('connection', function(socket){
       room:data[1]
     };
     socket.join(data[1]);
-    header='';
+    header='> User [';
     if (authList[data[0]]['admin']) {
       header = "> Admin [<img src='/static/admin.png'> "}
     io.to(data[1]).emit('message', header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
