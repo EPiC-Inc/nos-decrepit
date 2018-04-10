@@ -87,7 +87,7 @@ io.on('connection', function(socket){
             // Write to users.json
             content = JSON.stringify(authList);
             fs.writeFile("users.json", content, 'utf8', function (err) {
-              if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully added!");}
+              if (err) {return console.log(err);} else {io.emit('message', "> User successfully added!");}
               console.log(splitData[1]+" was added!");});
           }
         } else if (data.startsWith("?rmuser ") && authList[senderName] !== undefined && authList[senderName]['admin']){
@@ -105,7 +105,7 @@ io.on('connection', function(socket){
               delete authList[splitData[1]];
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully removed!");}
+                if (err) {return console.log(err);} else {io.emit('message', "> User successfully removed!");}
                 console.log(splitData[1]+" was removed!");});
             }
           }
@@ -125,7 +125,7 @@ io.on('connection', function(socket){
               authList[splitData[1]]['admin'] = true;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully promoted!");}
+                if (err) {return console.log(err);} else {io.emit('message', "> User successfully promoted!");}
                 console.log(splitData[1]+" was promoted!");});
             }
 
@@ -138,7 +138,7 @@ io.on('connection', function(socket){
               authList[splitData[1]]['admin'] = false;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully demoted!");}
+                if (err) {return console.log(err);} else {io.emit('message', "> User successfully demoted!");}
                 console.log(splitData[1]+" was demoted!");});
             }
           
@@ -156,7 +156,7 @@ io.on('connection', function(socket){
               authList[splitData[1]]['active'] = false;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully banned!");}
+                if (err) {return console.log(err);} else {io.emit('message', "> User successfully banned!");}
                 console.log(splitData[1]+" was banned!!!");});
             }
         } else if (data.startsWith("?unban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
@@ -168,7 +168,7 @@ io.on('connection', function(socket){
               authList[splitData[1]]['active'] = true;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully unbanned!");}
+                if (err) {return console.log(err);} else {io.emit('message', "> User successfully unbanned!");}
                 console.log(splitData[1]+" was unbanned!");});
             }
         }
