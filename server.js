@@ -140,8 +140,13 @@ io.on('connection', function(socket){
           // Ban
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
-              io.to(socket.id).emit('message', "> User not found!");
+            io.to(socket.id).emit('message', "> User not found!");
             } else {
+              for (key in users) {
+                if (users[key].name == splitData[1]) {
+                  delete users[key];
+                }
+              }
               authList[splitData[1]]['active'] = false;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
