@@ -125,10 +125,29 @@ io.on('connection', function(socket){
 
         } else if (data.startsWith("?demote ") && authList[senderName]['admin']) {
           // Demote
+          splitData = data.split(" ");
+          if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
+              io.to(socket.id).emit('message', "> User not found!");
+            } else {
+              authList[splitData[1]]['admin'] = false;
+              content = JSON.stringify(authList);
+              fs.writeFile("users.json", content, 'utf8', function (err) {
+                if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully demoted!");}
+                console.log(splitData[1]+" was demoted!");});
+            }
           
         } else if (data.startsWith("?ban ") && authList[senderName]['admin']) {
           // Ban
-
+          splitData = data.split(" ");
+          if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
+              io.to(socket.id).emit('message', "> User not found!");
+            } else {
+              authList[splitData[1]]['active'] = false;
+              content = JSON.stringify(authList);
+              fs.writeFile("users.json", content, 'utf8', function (err) {
+                if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully banned!");}
+                console.log(splitData[1]+" was banned!!!");});
+            }
         }
       }
       if (send) {
