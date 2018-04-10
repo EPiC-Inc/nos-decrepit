@@ -94,7 +94,7 @@ io.on('connection', function(socket){
           // Remove a user
           splitData = data.split(" ");
           if (splitData.length > 1) {
-            if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
+            if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
               io.to(socket.id).emit('message', "> User not found!");
             } else {
               for (key in users) {
@@ -109,12 +109,14 @@ io.on('connection', function(socket){
                 console.log(splitData[1]+" was removed!");});
             }
           }
+          // Broadcast code
         } else if (data.startsWith("?broadcast ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           send = false;
-          var packet = "<span style='background:cyan;'>[_System] "+data.substring(11)+"</span>";
+          var packet = "<span style='background:cyan;'>> "+data.substring(11)+"</span>";
           io.emit("message", packet);
         } else if (data == '?help' && authList[senderName]['admin']) {
           io.to(socket.id).emit('message', cmdHelp);
+
         // Promotion / demotion / ban code
         } else if (data.startsWith("?promote ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Promote
@@ -132,7 +134,7 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?demote ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Demote
           splitData = data.split(" ");
-          if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
+          if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
               io.to(socket.id).emit('message', "> User not found!");
             } else {
               authList[splitData[1]]['admin'] = false;
@@ -145,7 +147,7 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?ban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Ban
           splitData = data.split(" ");
-          if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
+          if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
             io.to(socket.id).emit('message', "> User not found!");
             } else {
               for (key in users) {
@@ -162,7 +164,7 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?unban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Un-ban
           splitData = data.split(" ");
-          if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
+          if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
               io.to(socket.id).emit('message', "> User not found!");
             } else {
               authList[splitData[1]]['active'] = true;
