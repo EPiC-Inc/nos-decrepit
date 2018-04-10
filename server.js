@@ -74,7 +74,7 @@ io.on('connection', function(socket){
     if (users[socket.id] !== undefined) {
       var senderName = users[socket.id].name;
       if (data.startsWith("?")) {
-        if (data.startsWith("?adduser ") && authList[senderName]['admin']) {
+        if (data.startsWith("?adduser ") && authList[senderName] !== undefined &&authList[senderName]['admin']) {
           splitData = data.split(" ");
           if (splitData.length > 2 && !isNaN(splitData[2]) && authList[splitData[1]] == undefined) {
             newUser = {
@@ -90,7 +90,7 @@ io.on('connection', function(socket){
               if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully added!");}
               console.log(splitData[1]+" was added!");});
           }
-        } else if (data.startsWith("?rmuser ") && authList[senderName]['admin']){
+        } else if (data.startsWith("?rmuser ") && authList[senderName] !== undefined && authList[senderName]['admin']){
           // Remove a user
           splitData = data.split(" ");
           if (splitData.length > 1) {
@@ -109,14 +109,14 @@ io.on('connection', function(socket){
                 console.log(splitData[1]+" was removed!");});
             }
           }
-        } else if (data.startsWith("?broadcast ") && authList[senderName]['admin']) {
+        } else if (data.startsWith("?broadcast ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           send = false;
           var packet = "<span style='background:cyan;'>[_System] "+data.substring(11)+"</span>";
           io.emit("message", packet);
         } else if (data == '?help' && authList[senderName]['admin']) {
           io.to(socket.id).emit('message', cmdHelp);
         // Promotion / demotion / ban code
-        } else if (data.startsWith("?promote ") && authList[senderName]['admin']) {
+        } else if (data.startsWith("?promote ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Promote
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
@@ -129,7 +129,7 @@ io.on('connection', function(socket){
                 console.log(splitData[1]+" was promoted!");});
             }
 
-        } else if (data.startsWith("?demote ") && authList[senderName]['admin']) {
+        } else if (data.startsWith("?demote ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Demote
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
@@ -142,7 +142,7 @@ io.on('connection', function(socket){
                 console.log(splitData[1]+" was demoted!");});
             }
           
-        } else if (data.startsWith("?ban ") && authList[senderName]['admin']) {
+        } else if (data.startsWith("?ban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Ban
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
@@ -159,7 +159,7 @@ io.on('connection', function(socket){
                 if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully banned!");}
                 console.log(splitData[1]+" was banned!!!");});
             }
-        } else if (data.startsWith("?unban ") && authList[senderName]['admin']) {
+        } else if (data.startsWith("?unban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Un-ban
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
