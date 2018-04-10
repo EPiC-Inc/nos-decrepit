@@ -37,7 +37,9 @@ function getCookie(cname) {
 }
 
 function newAcct() {
-  if (pwd.value == cPwd.value) {
+  if (usr.value.includes(" ")) {
+    document.getElementById("errors").innerHTML = "Error: Spaces are not allowed in the username!";
+  } else if (pwd.value == cPwd.value) {
     username = usr.value;
     password = hashCode(pwd.value);
     console.log("test");
