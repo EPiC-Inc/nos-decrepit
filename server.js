@@ -91,11 +91,17 @@ io.on('connection', function(socket){
               console.log(splitData[1]+" was added!");});
           }
         } else if (data.startsWith("?rmuser ") && authList[senderName]['admin']){
+          // Remove a user
           splitData = data.split(" ");
           if (splitData.length > 1) {
             if (authList[splitData[1]] == undefined && authList[splitData[1]] !== "_System") {
               io.to(socket.id).emit('message', "> User not found!");
             } else {
+              for (key in users) {
+                if (users[key].name == splitData[1]) {
+                  delete users[key];
+                }
+              }
               delete authList[splitData[1]];
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
