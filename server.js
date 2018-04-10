@@ -7,7 +7,7 @@ var url = require('url');
 var fs = require('fs');
 
 // Variables
-var cmdHelp = "?adduser [user] [hash]: Adds a user<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg under _System"
+var cmdHelp = "?adduser [user] [hash]: Adds a user<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg under _System<br>?ban [user] : Bans a user from the chat"
 var users = {};
 var authList = require('./users.json');
 //console.log(authList);
@@ -101,10 +101,12 @@ io.on('connection', function(socket){
               fs.writeFile("users.json", content, 'utf8', function (err) {
                 if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully removed!");}
                 console.log("The file was saved!");});}}
-        } else if (data.startsWith("?broadcast ")) {
+        } else if (data.startsWith("?broadcast ") && authList[senderName]['admin']) {
           send = false;
           var packet = "<span style='background:cyan;'>[_System] "+data.substring(11)+"</span>";
           socket.emit("message", packet);
+        } else if (data == '?help' && authList[senderName]['admin']) {
+          io.to(socket.id).emit('message', cmdHelp);
         }
       }
       if (send) {
