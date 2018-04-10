@@ -115,9 +115,9 @@ io.on('connection', function(socket){
             } else {
               authList[splitData[1]]['admin'];
               content = JSON.stringify(authList);
-              fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully promoted!");}
-                console.log(splitData[1]+" was promoted!");});}}
+              //fs.writeFile("users.json", content, 'utf8', function (err) {
+                //if (err) {return console.log(err);} else {io.to(socket.id).emit('message', "> User successfully promoted!");}
+                //console.log(splitData[1]+" was promoted!");});}
 
         } else if (data.startsWith("?demote ") && authList[senderName]['admin']) {
           // Demote
