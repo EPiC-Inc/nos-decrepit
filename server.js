@@ -104,7 +104,7 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?broadcast ") && authList[senderName]['admin']) {
           send = false;
           var packet = "<span style='background:cyan;'>[_System] "+data.substring(11)+"</span>";
-          socket.broadcast.emit("message", packet);
+          io.emit("message", packet);
         } else if (data == '?help' && authList[senderName]['admin']) {
           io.to(socket.id).emit('message', cmdHelp);
         } else if (data.startsWith("?ban ") && authList[senderName]['admin']){
