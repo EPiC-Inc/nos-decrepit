@@ -24,7 +24,6 @@ a:hover {
   opacity: 1;
   transition: opacity 0.6s;
   margin-bottom: 15px;
-  position: sticky;
 }
 
 .announcement.success {background-color: #4CAF50;}
