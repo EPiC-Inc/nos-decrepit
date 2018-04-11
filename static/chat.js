@@ -130,7 +130,7 @@ socket.on('a-ok', function(){
 socket.on('users online', function(data){
   users.innerHTML = '';
   for (i in data) {
-    users.innerHTML += '<br><button style="background:lightcyan;border:none;">'+data[i]+'</button>';
+    users.innerHTML += '<br><button style="background:lightcyan;border:none;" onclick="m.value+=\'@\'+data[i]">'+data[i]+'</button>';
   }
 });
 
