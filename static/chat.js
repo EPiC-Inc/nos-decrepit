@@ -9,6 +9,7 @@ var users = document.getElementById("onlineUsers");
 // Variables
 var room = '';
 var menuOpen = false;
+var online = []
 
 //Functions
 //Change favicon
@@ -130,7 +131,7 @@ socket.on('a-ok', function(){
 socket.on('users online', function(data){
   users.innerHTML = '';
   for (i in data) {
-    users.innerHTML += '<br><button style="background:lightcyan;border:none;" onclick="m.value+=\'@\'+data[i]">'+data[i]+'</button>';
+    users.innerHTML += '<br><button style="background:lightcyan;border:none;font-size:15px;" onclick="">'+data[i]+'</button>';
   }
 });
 
