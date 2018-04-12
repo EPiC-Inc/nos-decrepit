@@ -136,7 +136,8 @@ io.on('connection', function(socket){
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
               io.to(socket.id).emit('message', "> User not found!");
-            } else {
+            } if (authList[senderName]['admin'])  io.to(socket.id).emit('message', "> Admins cannot be demoted!");
+          else {
               authList[splitData[1]]['admin'] = false;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
@@ -149,7 +150,8 @@ io.on('connection', function(socket){
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
             io.to(socket.id).emit('message', "> User not found!");
-            } else {
+            } if (authList[senderName]['admin'])  io.to(socket.id).emit('message', "> Admins cannot be banned!");
+          else {
               for (key in users) {
                 if (users[key].name == splitData[1]) {
                   delete users[key];
