@@ -54,6 +54,7 @@ socket.on('err', function(data){
   document.getElementById("errors").innerHTML = data;
   console.log('err : '+data);
   pwd.value='';
+  cPwd.value='';
 });
 
 socket.on('a-ok', function(){
