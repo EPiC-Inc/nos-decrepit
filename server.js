@@ -208,8 +208,19 @@ io.on('connection', function(socket){
     } else if (authList[data[0]] !== undefined) {
       io.to(socket.id).emit('err', "Error: Username already in use!");
     } else {
-      console.log("New account request:"+data[0]+" "+data[1]);
-      io.to(socket.id).emit('err', "Success! Your account has been requested for creation. It may take some time to manually activate.");
+      newUser = {
+              "active":true,
+              "admin":false,
+              "nameStyle":"",
+              "pass":data[1]
+            };
+            authList[data[0]] = newUser;
+            // Write to users.json
+            content = JSON.stringify(authList);
+            fs.writeFile("users.json", content, 'utf8', function (err) {
+              if (err) {return console.log(err);} else {io.emit('message', "> User successfully added!");}
+              console.log(data[0]+" has signed up!");});
+      io.to(socket.id).emit('err', "Success! You may now log in.");
     }
   });
 });
