@@ -47,7 +47,7 @@ io.on('connection', function(socket){
     };
     socket.join(data[1]);
     header='> User [';
-    if (authList[data[0]]['admin']) {
+    if (authList[data[0]] !== undefined && authList[data[0]]['admin']) {
       header = "> Admin [<img src='/static/admin.png'> "}
     io.to(data[1]).emit('message', header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
   });
