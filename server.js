@@ -41,6 +41,7 @@ io.on('connection', function(socket){
 
   // Message upon joining a room and room switching script
   socket.on('join', function(data){
+    if (authList[data[0]] !== undefined) {
     users[socket.id] = {
       name:data[0],
       room:data[1]
@@ -50,7 +51,7 @@ io.on('connection', function(socket){
     if (authList[data[0]] !== undefined && authList[data[0]]['admin']) {
       header = "> Admin [<img src='/static/admin.png'> "}
     io.to(data[1]).emit('message', header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
-  });
+    }});
 
   // Auth
   socket.on('auth', function(data){
