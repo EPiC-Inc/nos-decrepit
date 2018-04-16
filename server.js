@@ -117,7 +117,7 @@ io.on('connection', function(socket){
           var packet = "<span style='background:cyan;'>> "+data.substring(11)+"</span>";
           io.emit("message", packet);
         } else if (data == '?help') {
-          if( && authList[senderName]['admin']) {io.to(socket.id).emit('message', adminHelp);}
+          if(authList[senderName]['admin']) {io.to(socket.id).emit('message', adminHelp);}
           else {io.to(socket.id).emit('message', cmdHelp);}
 
         // Promotion / demotion / ban code
