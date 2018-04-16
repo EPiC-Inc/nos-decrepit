@@ -144,7 +144,7 @@ socket.on("message", function(data){
   if (!alertWaiting) {
     if (!vis()) {changeIco('/static/msg.png');}
   }
-  if (data.includes('@'+username)) {
+  if (data.includes('@'+username) || data.includes('@everyone')) {
     if (!vis()) {changeIco('/static/alert.png');}
     alertWaiting = true;
     start = '<div class="alert">';
