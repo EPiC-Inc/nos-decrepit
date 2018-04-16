@@ -10,6 +10,7 @@ var users = document.getElementById("onlineUsers");
 var room = '';
 var menuOpen = false;
 var online = []
+var alertWaiting = false;
 
 //Functions
 //Change favicon
@@ -109,7 +110,8 @@ if (getCookie('user') !== "" && getCookie('user') !== undefined) {
 
 // Callbacks
 vis(function(){
-    if (vis()) {changeIco('/static/favicon.png');}
+    if (vis()) {changeIco('/static/favicon.png');
+                alertWaiting = false;}
     //changeIco(vis() ? '/static/favicon.png' : '/static/alert.png');
 });
 
@@ -139,8 +141,12 @@ socket.on("message", function(data){
   // Add message
   // console.log(data);
   var start='<div>'
+  if (!alertWaiting) {
+    if (!vis()) {changeIco('/static/msg.png');}
+  }
   if (data.includes('@'+username)) {
     if (!vis()) {changeIco('/static/alert.png');}
+    alertWaiting = true;
     start = '<div class="alert">';
   }
   messages.innerHTML += start+data+"</div>";
