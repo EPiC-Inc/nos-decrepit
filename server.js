@@ -7,7 +7,8 @@ var url = require('url');
 var fs = require('fs');
 
 // Variables
-var cmdHelp = "?adduser [user] [hash] : Adds a user<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg under _System<br>?ban [user] : Bans a user from the chat"
+var cmdHelp = "?llamafy @[username] : Turns the user into a llama!";
+var adminHelp = "?adduser [user] [hash] : Adds a user<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg under _System<br>?ban [user] : Bans a user from the chat"
 var users = {};
 var authList = require('./users.json');
 //console.log(authList);
@@ -115,8 +116,9 @@ io.on('connection', function(socket){
           send = false;
           var packet = "<span style='background:cyan;'>> "+data.substring(11)+"</span>";
           io.emit("message", packet);
-        } else if (data == '?help' && authList[senderName]['admin']) {
-          io.to(socket.id).emit('message', cmdHelp);
+        } else if (data == '?help') {
+          if( && authList[senderName]['admin']) {io.to(socket.id).emit('message', adminHelp);}
+          else {io.to(socket.id).emit('message', cmdHelp);}
 
         // Promotion / demotion / ban code
         } else if (data.startsWith("?promote ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
@@ -174,6 +176,12 @@ io.on('connection', function(socket){
                 if (err) {return console.log(err);} else {io.emit('message', "> User successfully unbanned!");}
                 console.log(splitData[1]+" was unbanned by "+senderName+"!");});
             }
+        } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
+          // Llamafy
+          send = false;
+          splitData = data.split(" ");
+          var packet = "<span style='background:cyan;'>> "+splitData[1]+" has been turned into a llama by "+senderName+"!</span>";
+          io.emit("message", packet);
         }
       }
       if (send) {
