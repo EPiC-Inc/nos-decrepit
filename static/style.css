@@ -109,6 +109,10 @@ header div {
   text-align: center;
 }
 
+header div button {
+  height: 50px;
+}
+
 header .right {
   float: right;
 }
