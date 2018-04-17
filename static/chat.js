@@ -152,3 +152,8 @@ socket.on("message", function(data){
   messages.innerHTML += start+data+"</div>";
   window.scrollTo(0,document.body.scrollHeight);
 });
+
+socket.on("disconnect", function(reason){
+  messages.innerhtml += "<div>> Connection terminated. <</div>";
+  console.log(reason);
+});
