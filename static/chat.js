@@ -123,6 +123,7 @@ socket.on('err', function(data){
 socket.on('a-ok', function(){
   console.log("A-OK recieved!");
   document.getElementById("logout").hidden = false;
+  document.getElementById("login").hidden = true;
   room = getUrlVars()['room'];
   if (room == undefined) {room = 'lobby';}
   //console.log(room);
