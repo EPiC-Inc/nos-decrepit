@@ -154,6 +154,6 @@ socket.on("message", function(data){
 });
 
 socket.on("disconnect", function(reason){
-  messages.innerhtml += "<div>> Connection terminated. <</div>";
+  messages.innerHTML += "<div>> Connection terminated. <</div>";
   console.log(reason);
 });
