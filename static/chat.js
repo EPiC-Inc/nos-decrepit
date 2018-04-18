@@ -160,7 +160,7 @@ socket.on("message", function(data){
   }
   var ds = data.split(' ');
   dataSplit = [ds.shift(), ds.join(' ')];
-	if (!data.startsWith('>') && !dataSplit[1].includes('<iframe') && !dataSplit[1].includes('<img')) {
+	if (!data.startsWith('>') && !dataSplit[1].includes('<iframe') && !dataSplit[1].includes('<img') && !dataSplit[1].includes('<a')) {
   	dataSplit[1] = cUrl(dataSplit[1]);
 	}
   data = dataSplit.join(' ');
