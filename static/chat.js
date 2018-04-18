@@ -158,11 +158,12 @@ socket.on("message", function(data){
     alertWaiting = true;
     start = '<div class="alert">';
   }
-  console.log(data.includes('<iframe'));
-  console.log(data.includes('<img'));
-	if (!data.includes('<iframe') && !data.includes('<img')) {
-  	data = cUrl(data);
+  var ds = data.split(' ');
+  dataSplit = [ds.shift(), ds.join(' ')]);
+	if (!data.startsWith('>') && !dataSplit[1].includes('<iframe') && !dataSplit[1].includes('<img')) {
+  	dataSplit[1] = cUrl(dataSplit[1]);
 	}
+  data = dataSplit.join(' ');
   $("#messages").append(start+data+"</div>");
   if (scroll.checked) {
     window.scrollTo(0,document.body.scrollHeight);
@@ -171,5 +172,6 @@ socket.on("message", function(data){
 
 socket.on("disconnect", function(reason){
   $("#messages").append("<div>> Connection terminated. <</div>");
+  window.scrollTo(0,document.body.scrollHeight);
   console.log(reason);
 });
