@@ -102,6 +102,13 @@ function changeRoom() {
   window.location.href = '/static/coms.html?room='+toGo;
 }
 
+function cUrl(str) {
+	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+	var text1=str.replace(exp, "<a href='$1'>$1</a>");
+	var exp2 =/(^|[^\/])(www\.[\S]+(\b|$))/gim;
+	return text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
+}
+
 // On page load
 //console.log(getCookie('user'));
 if (getCookie('user') !== "" && getCookie('user') !== undefined) {
@@ -151,6 +158,7 @@ socket.on("message", function(data){
     alertWaiting = true;
     start = '<div class="alert">';
   }
+  data = cUrl(data);
   $("#messages").append(start+data+"</div>");
   if (scroll.checked) {
     window.scrollTo(0,document.body.scrollHeight);
