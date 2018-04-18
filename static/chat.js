@@ -150,11 +150,11 @@ socket.on("message", function(data){
     alertWaiting = true;
     start = '<div class="alert">';
   }
-  messages.innerHTML += start+data+"</div>";
+  $("#messages").append(start+data+"</div>");
   window.scrollTo(0,document.body.scrollHeight);
 });
 
 socket.on("disconnect", function(reason){
-  messages.innerHTML += "<div>> Connection terminated. <</div>";
+  $("#messages").append("<div>> Connection terminated. <</div>");
   console.log(reason);
 });
