@@ -159,7 +159,7 @@ socket.on("message", function(data){
     start = '<div class="alert">';
   }
   var ds = data.split(' ');
-  dataSplit = [ds.shift(), ds.join(' ')]);
+  dataSplit = [ds.shift(), ds.join(' ')];
 	if (!data.startsWith('>') && !dataSplit[1].includes('<iframe') && !dataSplit[1].includes('<img')) {
   	dataSplit[1] = cUrl(dataSplit[1]);
 	}
