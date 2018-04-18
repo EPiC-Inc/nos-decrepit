@@ -158,7 +158,9 @@ socket.on("message", function(data){
     alertWaiting = true;
     start = '<div class="alert">';
   }
-  data = cUrl(data);
+	if (!data.includes('<iframe>') && !data.includes('<img>')) {
+  	data = cUrl(data);
+	}
   $("#messages").append(start+data+"</div>");
   if (scroll.checked) {
     window.scrollTo(0,document.body.scrollHeight);
