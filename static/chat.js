@@ -5,6 +5,7 @@ var socket=io();
 var messages = document.getElementById("messages");
 var m = document.getElementById("messageSender");
 var users = document.getElementById("onlineUsers");
+var scroll = document.getElementById("scroll");
 
 // Variables
 var room = '';
@@ -151,7 +152,9 @@ socket.on("message", function(data){
     start = '<div class="alert">';
   }
   $("#messages").append(start+data+"</div>");
-  window.scrollTo(0,document.body.scrollHeight);
+  if (scroll.checked) {
+    window.scrollTo(0,document.body.scrollHeight);
+  }
 });
 
 socket.on("disconnect", function(reason){
