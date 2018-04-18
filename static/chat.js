@@ -158,6 +158,7 @@ socket.on("message", function(data){
     alertWaiting = true;
     start = '<div class="alert">';
   }
+  console.log(data.includes('<iframe'));
 	if (!data.includes('<iframe') && !data.includes('<img')) {
   	data = cUrl(data);
 	}
