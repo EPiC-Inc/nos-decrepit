@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="/static/style.css">
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
@@ -33,9 +34,12 @@
       <div id='messages'></div>
     </td>
   </tr></table>
+  <div>
     <form class='msgSender' onsubmit="return false">
       <input id='messageSender' autocomplete="off" /><button onclick="sendMsg()">Send</button>
     </form>
+    <button><i class="material-icons">add circle</i></button>
+  </div>
   <div style='height:50px;'></div>
 </body>
 <script src='/static/chat.js'></script>
