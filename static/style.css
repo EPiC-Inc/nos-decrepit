@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0px;
+  box-sizing: border-box
+}
+
+a {
+  transition-duration: 0.4s;
+  color: #00ccff;
+}
+
+a:hover {
+  color: darkcyan;
+  background: cyan;
+}
+
+.announcement {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+}
+
+.announcement.success {background-color: #4CAF50;}
+.announcement.info {background-color: #2196F3;}
+.announcement.warning {background-color: #ff9800;}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+body {
+  font: 15px Roboto Mono, monospace;
+  background: white;
+}
+
+table {
+  width: 100%;
+}
+
+button {
+  background: cyan;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  border: 2px solid darkcyan;
+  transition-duration: .3s;
+}
+
+button:hover {
+  background: darkcyan;
+  color: cyan;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  padding-left: 10px;
+}
+
+li {
+  font-size: 20px;
+  padding-left: 20px;
+}
+
+.center {
+  width: 100%;
+  text-align: center;
+}
+
+input {
+  border: 2px solid black;
+  font-size: 18px;
+}
+
+.infobox {
+  border-radius: 10px;
+  height: 30px;
+  width: 200px;
+}
+
+h1 {
+  padding: 5px;
+}
+
+header {
+  background: #33ccff;
+  position: fixed;
+  width: 100%;
+}
+
+header div {
+  float: left;
+  clear: none;
+  text-align: center;
+}
+
+header div button {
+  height: 50px;
+}
+
+header .right {
+  float: right;
+}
+
+.alert {
+  background: red;
+}
+
+.msgSender {
+  background: white;
+  padding: 3px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.msgSender input {
+  padding: 10px;
+  width: 90%;
+  margin-right: .5%;
+}
+
+.msgSender button {
+  width: 9%;
+  border: none;
+  padding: 10px;
+}
+
+#menu {
+  background: lightcyan;
+  max-width: 400px;
+  position: fixed;
+}
+
+#messages div {
+  font-size: 20px;
+  width: 100%;
+}

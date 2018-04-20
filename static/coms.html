@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title id='title'>NOS</title>
+  <link rel="shortcut icon" type="image/png" href="/static/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+  <header>
+    <div><button id='menuBtn' onclick="menu()" style="width:50px;height:50px;">Ξ</button></div>
+    <div><h1 id='roomName'>401 - Please log in!</h1></div>
+    <div class='right'><a href='./login.html'><button id='login'>Log in</button></a></div>
+    <div class='right'><button hidden='true' id='logout' onclick='logout()'>Log out</button></div>
+  </header>
+  <div style='height:50px;'></div>
+
+  <div id='menu' hidden='true'>
+    <form onsubmit='return false'>
+      <input style="width:100px;" id='roomSelect' />
+      <button style='font-size:15px;' onclick="changeRoom()">Change room</button>
+    </form><br>
+    <input id="scroll" type="checkbox" checked='true' style='height:25px;width:25px;'> Autoscroll<br>
+    <b>Online:</b>
+    <div id='onlineUsers'>
+    </div>
+  </div>
+  <table><tr>
+    <td>
+      <!-- Encapsulate messages in a div, just in case -->
+      <div id='messages'></div>
+    </td>
+  </tr></table>
+  <div class='msgSender'>
+    <form onsubmit="return false">
+      <input id='messageSender' autocomplete="off" /><button onclick="sendMsg()">Send</button>
+    </form>
+    <!--<button style='height:50px;width:50px;font-size:25px;'>+</button>-->
+  </div>
+  <div style='height:50px;'></div>
+</body>
+<script src='/static/chat.js'></script>
+</html>
