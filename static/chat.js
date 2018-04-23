@@ -173,5 +173,6 @@ socket.on("message", function(data){
 socket.on("disconnect", function(reason){
   $("#messages").append("<div>> Connection terminated. <</div>");
   window.scrollTo(0,document.body.scrollHeight);
+	changeIco('/static/disconnect.png');
   console.log(reason);
 });
