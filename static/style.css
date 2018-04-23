@@ -12,6 +12,10 @@ a {
   color: #00ccff;
 }
 
+div p {
+  display: inline;
+}
+
 a:hover {
   color: darkcyan;
   background: cyan;
