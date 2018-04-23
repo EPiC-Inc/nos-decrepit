@@ -7,13 +7,13 @@
   box-sizing: border-box
 }
 
-.tooltip {
-    position: relative;
+.user {
+    /*position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
+    border-bottom: 1px dotted black;*/
 }
 
-.tooltip .tooltiptext {
+.user .tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: black;
@@ -27,7 +27,7 @@
     left: 110%;
 }
 
-.tooltip .tooltiptext::after {
+.user .tooltiptext::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -37,7 +37,7 @@
     border-style: solid;
     border-color: transparent black transparent transparent;
 }
-.tooltip:hover .tooltiptext {
+.user:hover .tooltiptext {
     visibility: visible;
 }
 
