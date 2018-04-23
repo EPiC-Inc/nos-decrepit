@@ -22,7 +22,7 @@
     position: absolute;
     padding: 5px 0;
     z-index: 1;
-    top: -5px;
+    top: 5px;
     left: 100%;
 }
 .user:hover .tooltiptext {
