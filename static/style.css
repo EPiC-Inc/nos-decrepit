@@ -23,7 +23,7 @@
     padding: 5px 0;
     z-index: 1;
     top: -5px;
-    left: 110%;
+    left: 100%;
 }
 .user:hover .tooltiptext {
     visibility: visible;
