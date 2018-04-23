@@ -11,7 +11,7 @@ This is a web-based chat client that will be slowly evolving.
 `git clone https://github.com/EPiC-Inc/nos-alpha.git`
 
 # Installing Dependencies
-`npm install --save express socket.io`
+`npm install --save express socket.io markdown`
 
 # Starting server
 `node server.js [port]`<br>
