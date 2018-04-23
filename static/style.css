@@ -34,12 +34,9 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent black transparent transparent;
-    opacity: 0;
-    transition: opacity 1s;
 }
 .user:hover .tooltiptext {
     visibility: visible;
-    opacity: 1;
 }
 
 a {
