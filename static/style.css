@@ -10,7 +10,6 @@
 .user {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
 }
 
 .user .tooltiptext {
@@ -26,7 +25,6 @@
     top: -5px;
     left: 110%;
 }
-
 .user .tooltiptext::after {
     content: "";
     position: absolute;
@@ -36,9 +34,12 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent black transparent transparent;
+    opacity: 0;
+    transition: opacity 1s;
 }
 .user:hover .tooltiptext {
     visibility: visible;
+    opacity: 1;
 }
 
 a {
