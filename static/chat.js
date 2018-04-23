@@ -142,7 +142,7 @@ socket.on('a-ok', function(){
 socket.on('users online', function(data){
   users.innerHTML = '';
   for (i in data) {
-    users.innerHTML += '<br><div class="userbtn"><button style="background:lightcyan;border:none;font-size:15px;" onclick="m.value+=\'@'+data[i]+'\'">'+data[i]+'</button><span class="tooltiptext">Message</span></div>';
+    users.innerHTML += '<br><div class="user"><button style="background:lightcyan;border:none;font-size:15px;" onclick="m.value+=\'@'+data[i]+'\'">'+data[i]+'</button><span class="tooltiptext">Message</span></div>';
   }
 });
 
