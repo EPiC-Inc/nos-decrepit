@@ -191,7 +191,7 @@ io.on('connection', function(socket){
           header = "<img src='/static/admin.png'>"}
 
         // Graft together an unnecessarily complicated packet =)
-        data = md.toHTML(data);
+        //data = md.toHTML(data); // Fix this plz
         var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
         if(users[socket.id] !== undefined) {io.to(users[socket.id].room).emit('message', packet);}
       }
