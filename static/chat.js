@@ -171,7 +171,7 @@ socket.on("message", function(data){
   	dataSplit[1] = cUrl(dataSplit[1]);
 	}
   data = dataSplit.join(' ');
-  $("#messages").append((toLocalTime()).toISOString().replace(/z|t/gi,' ').trim()+" "+start+data+"</div>");
+  $("#messages").append(toLocalTime().toLocaleString()+" "+start+data+"</div>");
   if (scroll.checked) {
     window.scrollTo(0,document.body.scrollHeight);
   }
