@@ -109,6 +109,13 @@ function cUrl(str) {
 	return text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
 }
 
+var toLocalTime = function() {
+  var d = new Date();
+  var offset = (new Date().getTimezoneOffset() / 60) * -1;
+  var n = new Date(d.getTime() + offset);
+  return n;
+};
+
 // On page load
 //console.log(getCookie('user'));
 if (getCookie('user') !== "" && getCookie('user') !== undefined) {
@@ -164,7 +171,7 @@ socket.on("message", function(data){
   	dataSplit[1] = cUrl(dataSplit[1]);
 	}
   data = dataSplit.join(' ');
-  $("#messages").append((new Date).toISOString().replace(/z|t/gi,' ').trim()+" "+start+data+"</div>");
+  $("#messages").append((toLocalTime()).toISOString().replace(/z|t/gi,' ').trim()+" "+start+data+"</div>");
   if (scroll.checked) {
     window.scrollTo(0,document.body.scrollHeight);
   }
