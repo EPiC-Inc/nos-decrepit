@@ -164,7 +164,7 @@ socket.on("message", function(data){
   	dataSplit[1] = cUrl(dataSplit[1]);
 	}
   data = dataSplit.join(' ');
-  $("#messages").append(start+data+"</div>");
+  $("#messages").append((new Date).toISOString().replace(/z|t/gi,' ').trim()+" "+start+data+"</div>");
   if (scroll.checked) {
     window.scrollTo(0,document.body.scrollHeight);
   }
