@@ -79,7 +79,7 @@ function logout() {
 
 function sendMsg() {
   if (room !== undefined && m.value.trim() !== '') {
-    socket.emit('message', m.value);
+    socket.emit('message', btoa(m.value));
     m.value = '';
   }
 }
