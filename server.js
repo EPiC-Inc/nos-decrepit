@@ -36,7 +36,7 @@ io.on('connection', function(socket){
       header='> User [';
       if (authList[users[socket.id].name]['admin']) {
         header = "> Admin [<img src='/static/admin.png'>"}
-      io.to(users[socket.id].room).emit('message', header+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left");
+      io.to(users[socket.id].room).emit('message', Buffer.from(header+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left").toString('base64'));
       delete users[socket.id];
     }
   });
@@ -52,7 +52,7 @@ io.on('connection', function(socket){
     header='> User [';
     if (authList[data[0]] !== undefined && authList[data[0]]['admin']) {
       header = "> Admin [<img src='/static/admin.png'>"}
-    io.to(data[1]).emit('message', header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!");
+    io.to(data[1]).emit('message', Buffer.from(header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!").toString('base64'));
     }});
 
   // Auth
