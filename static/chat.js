@@ -155,8 +155,8 @@ socket.on('users online', function(data){
 
 socket.on("message", function(data){
   data = atob(String(data));
+  console.log(data);
   // Add message
-  // console.log(data);
   var start='<div>'
   if (!alertWaiting) {
     if (!vis()) {changeIco('/static/msg.png');}
