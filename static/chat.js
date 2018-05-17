@@ -154,8 +154,8 @@ socket.on('users online', function(data){
 });
 
 socket.on("message", function(data){
-  data = atob(String(data));
   console.log(data);
+  data = atob(String(data));
   // Add message
   var start='<div>'
   if (!alertWaiting) {
