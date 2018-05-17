@@ -154,7 +154,7 @@ socket.on('users online', function(data){
 });
 
 socket.on("message", function(data){
-  data = atob(data);
+  data = Buffer.from(data, 'base64').toString('ascii');
   // Add message
   // console.log(data);
   var start='<div>'
