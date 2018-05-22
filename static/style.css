@@ -5,6 +5,7 @@
   padding: 0;
   border: 0px;
   box-sizing: border-box
+  font: 15px Roboto Mono, monospace;
 }
 
 .user {
@@ -72,7 +73,6 @@ a:hover {
 }
 
 body {
-  font: 15px Roboto Mono, monospace;
   background: white;
 }
 
