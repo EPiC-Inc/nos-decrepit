@@ -87,7 +87,7 @@ button {
   font-size: 20px;
   border: 2px solid darkcyan;
   transition-duration: .3s;
-  font: 15px Roboto Mono, monospace;
+  font-family: Roboto Mono, monospace;
 }
 
 button:hover {
