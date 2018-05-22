@@ -117,7 +117,7 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?broadcast ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           send = false;
           var packet = "<span style='background:cyan;'>> "+data.substring(11)+"</span>";
-          io.emit("message", packet);
+          io.emit("message", Buffer.from(packet).toString('base64'));
         } else if (data == '?help') {
           if(authList[senderName]['admin']) {io.to(socket.id).emit('message', adminHelp);}
           else {io.to(socket.id).emit('message', cmdHelp);}
