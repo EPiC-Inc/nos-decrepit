@@ -5,7 +5,6 @@
   padding: 0;
   border: 0px;
   box-sizing: border-box
-  font: 15px Roboto Mono, monospace;
 }
 
 .user {
@@ -74,6 +73,7 @@ a:hover {
 
 body {
   background: white;
+  font: 15px Roboto Mono, monospace;
 }
 
 table {
@@ -87,6 +87,7 @@ button {
   font-size: 20px;
   border: 2px solid darkcyan;
   transition-duration: .3s;
+  font: 15px Roboto Mono, monospace;
 }
 
 button:hover {
@@ -101,6 +102,7 @@ h1, h2, h3, h4, h5, h6 {
 li {
   font-size: 20px;
   padding-left: 20px;
+  font: 15px Roboto Mono, monospace;
 }
 
 .center {
@@ -111,6 +113,7 @@ li {
 input {
   border: 2px solid black;
   font-size: 18px;
+  font: 15px Roboto Mono, monospace;
 }
 
 .infobox {
