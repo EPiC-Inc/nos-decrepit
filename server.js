@@ -192,7 +192,9 @@ io.on('connection', function(socket){
           header = "<img src='/static/admin.png'>"}
 
         // Graft together an unnecessarily complicated packet =)
-        data = sanitize(data);
+        data = sanitize(data, {
+  allowedTags: sanitize.defaults.allowedTags.concat([ 'img', 'marquee' ])
+});
         var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
         if(users[socket.id] !== undefined) {io.to(users[socket.id].room).emit('message', Buffer.from(packet).toString('base64'));}
       }
