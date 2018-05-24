@@ -73,7 +73,7 @@ io.on('connection', function(socket){
 
   // Message sending script allowing for username colors
   socket.on("message", function(data){
-    data = Buffer.from(data, 'base64').toString('ascii')
+    data = Buffer.from(data, 'base64').toString('utf8')
     var send = true;
     if (users[socket.id] !== undefined && data !== undefined && data !== null) {
       var senderName = users[socket.id].name;
@@ -195,6 +195,7 @@ io.on('connection', function(socket){
         data = sanitize(data, {
   allowedTags: sanitize.defaults.allowedTags.concat([ 'img', 'marquee' ])
 });
+        data = data.substring(0, 101);
         var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
         if(users[socket.id] !== undefined) {io.to(users[socket.id].room).emit('message', Buffer.from(packet).toString('base64'));}
       }
