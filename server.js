@@ -215,6 +215,7 @@ io.on('connection', function(socket){
 
   // Log a new user account request
   socket.on('new user', function(data){
+    data = sanitize(data);
     if (data[0] == '' || data[1] == 0) {
       io.to(socket.id).emit('err', "Error: Username / password can not be blank!");
     } else if (authList[data[0]] !== undefined) {
@@ -230,8 +231,8 @@ io.on('connection', function(socket){
             // Write to users.json
             content = JSON.stringify(authList);
             fs.writeFile("users.json", content, 'utf8', function (err) {
-              if (err) {return console.log(err);} else {io.emit('message', "> User successfully added!");}
-              console.log(data[0]+" has signed up!");});
+              if (err) {return console.log(err);} else {
+              console.log(data[0]+" has signed up!");}});
       io.to(socket.id).emit('err', "Success! You may now log in.");
     }
   });
