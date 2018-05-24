@@ -5,7 +5,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var url = require('url');
 var fs = require('fs');
-var md = require('markdown').markdown;
+var sanitize = require('sanitize-html');
 
 // Variables
 var cmdHelp = "?llamafy @[username] : Turns the user into a llama!";
@@ -192,8 +192,8 @@ io.on('connection', function(socket){
           header = "<img src='/static/admin.png'>"}
 
         // Graft together an unnecessarily complicated packet =)
-        //data = md.toHTML(data); // Fix this plz
         var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
+        packet = sanitize(packet);
         if(users[socket.id] !== undefined) {io.to(users[socket.id].room).emit('message', Buffer.from(packet).toString('base64'));}
       }
     }
