@@ -79,7 +79,7 @@ function logout() {
 
 function sendMsg() {
   if (room !== undefined && m.value.trim() !== '') {
-    socket.emit('message', Buffer.from(m.value).toString('base64'));
+    socket.emit('message', btoa(unescape(encodeURIComponent(m.value))));
     m.value = '';
   }
 }
@@ -155,7 +155,7 @@ socket.on('users online', function(data){
 
 socket.on("message", function(data){
   console.log(data);
-  data = Buffer.from(data, 'base64').toString('utf8')
+  data = decodeURIComponent(escape(atob(String(data))));
   // Add message
   var start='<div>'
   if (!alertWaiting) {
