@@ -1,6 +1,6 @@
 // Dependencies
 var express = require('express');
-var app = express()
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var url = require('url');
@@ -73,7 +73,7 @@ io.on('connection', function(socket){
 
   // Message sending script allowing for username colors
   socket.on("message", function(data){
-    data = Buffer.from(data, 'base64').toString('utf8')
+    data = Buffer.from(data, 'base64').toString('utf8');
     var send = true;
     if (users[socket.id] !== undefined && data !== undefined && data !== null) {
       var senderName = users[socket.id].name;
