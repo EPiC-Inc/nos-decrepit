@@ -168,7 +168,7 @@ io.on('connection', function(socket){
               authList[splitData[1]]['admin'] = false;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully demoted!").toString('base64')");}
+                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully demoted!").toString('base64'));}
                 console.log(splitData[1]+" was demoted by "+senderName+"!");});
             }
           
