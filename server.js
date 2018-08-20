@@ -28,6 +28,14 @@ function saveMessage(msg) {
   }
 }
 
+// Function for date/time
+var toLocalTime = function() {
+  var d = new Date();
+  var offset = (new Date().getTimezoneOffset() / 60) * -1;
+  var n = new Date(d.getTime() + offset);
+  return n;
+};
+
 // Set the port (node server.js [port])
 // process.argv : 0:program 1:file 2:(in this case)port
 if (process.argv[2] == undefined) {
@@ -54,8 +62,9 @@ io.on('connection', function(socket){
       if (authList[users[socket.id].name]['admin']) {
         header = "> Admin [<img src='/static/admin.png'>"}
       msg = Buffer.from(header+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left").toString('base64');
-      io.to(users[socket.id].room).emit('message', msg);
-      saveMessage(msg);
+      datetimestring = toLocalTime().toLocaleString()
+      io.to(users[socket.id].room).emit('message', [datetimestring, msg]);
+      saveMessage([datetimestring, msg]);
       delete users[socket.id];
     }
   });
@@ -70,15 +79,17 @@ io.on('connection', function(socket){
     socket.join(data[1]);
     header='> User [';
     if (authList[data[0]] !== undefined && authList[data[0]]['admin']) {
-      header = "> Admin [<img src='/static/admin.png'>"}
+      header = "> Admin [<img src='/static/admin.png'>"
+    }
     msg = Buffer.from(header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!").toString('base64');
-    setTimeout(function(){io.to(data[1]).emit('message', msg);}, 1000);
+    datetimestring = toLocalTime().toLocaleString()
+    setTimeout(function(){io.to(data[1]).emit('message', [datetimestring, msg]);}, 1000);
     if (data[1] == 'lobby') {
       //io.to(socket.id).emit('message', msgs);
       for (i in msgs) {
         io.to(socket.id).emit('message', msgs[i]);
       }
-      saveMessage(msg);
+      saveMessage([datetimestring, msg]);
     }
     }});
 
@@ -103,6 +114,7 @@ io.on('connection', function(socket){
     data = Buffer.from(data, 'base64').toString('utf8');
     var send = true;
     if (users[socket.id] !== undefined && data !== undefined && data !== null) {
+      datetimestring = toLocalTime().toLocaleString() ///datetime
       var senderName = users[socket.id].name;
       if (data.startsWith("?")) {
         if (data.startsWith("?adduser ") && authList[senderName] !== undefined &&authList[senderName]['admin']) {
@@ -118,7 +130,7 @@ io.on('connection', function(socket){
             // Write to users.json
             content = JSON.stringify(authList);
             fs.writeFile("users.json", content, 'utf8', function (err) {
-              if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully added!").toString('base64'));}
+              if (err) {return console.log(err);} else {io.emit('message', [datetimestring, Buffer.from("> User successfully added!").toString('base64')]);}
               console.log(splitData[1]+" was added by "+senderName+"!");});
           }
         } else if (data.startsWith("?rmuser ") && authList[senderName] !== undefined && authList[senderName]['admin']){
@@ -227,10 +239,10 @@ io.on('connection', function(socket){
         data = data.substring(0, 256);
         var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
         if(users[socket.id] !== undefined) {
-          msg =  Buffer.from(packet).toString('base64');
-          io.to(users[socket.id].room).emit('message', msg);
+          msg = Buffer.from(packet).toString('base64');
+          io.to(users[socket.id].room).emit('message', [datetimestring, msg]);
           if (users[socket.id].room == 'lobby') {
-            saveMessage(msg);
+            saveMessage([datetimestring, msg]);
           }
         }
       }
