@@ -153,9 +153,9 @@ socket.on('users online', function(data){
   }
 });
 
-socket.on("message", function(data){
+socket.on("message", function(supadata){
   console.log(data);
-  data = decodeURIComponent(escape(atob(String(data))));
+  data = decodeURIComponent(escape(atob(String(supadata[1]))));
   // Add message
   var start='<div>'
   if (!alertWaiting) {
@@ -172,7 +172,7 @@ socket.on("message", function(data){
   	dataSplit[1] = cUrl(dataSplit[1]);
 	}
   data = dataSplit.join(' ');
-  $("#messages").append(toLocalTime().toLocaleString()+" "+start+data+"</div>");
+  $("#messages").append(supadata[0]+" "+start+data+"</div>");
   if (scroll.checked) {
     window.scrollTo(0,document.body.scrollHeight);
   }
