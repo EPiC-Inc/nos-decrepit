@@ -53,7 +53,7 @@ io.on('connection', function(socket){
       header='> User [';
       if (authList[users[socket.id].name]['admin']) {
         header = "> Admin [<img src='/static/admin.png'>"}
-      msg = Buffer.from(header+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left").toString('base64')
+      msg = Buffer.from(header+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left").toString('base64');
       io.to(users[socket.id].room).emit('message', msg);
       saveMessage(msg);
       delete users[socket.id];
@@ -71,10 +71,10 @@ io.on('connection', function(socket){
     header='> User [';
     if (authList[data[0]] !== undefined && authList[data[0]]['admin']) {
       header = "> Admin [<img src='/static/admin.png'>"}
-    msg = Buffer.from(header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!").toString('base64')
+    msg = Buffer.from(header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!").toString('base64');
     setTimeout(function(){io.to(data[1]).emit('message', msg);}, 500);
     if (data[1] == 'lobby') {
-      //io.to(socket.id).emit('message', msgs)
+      //io.to(socket.id).emit('message', msgs);
       for (i in msgs) {
         io.to(socket.id).emit('message', msgs[i]);
       }
@@ -146,8 +146,8 @@ io.on('connection', function(socket){
           var packet = "<span style='background:cyan;'>> "+data.substring(11)+"</span>";
           io.emit("message", Buffer.from(packet).toString('base64'));
         } else if (data == '?help') {
-          if(authList[senderName]['admin']) {io.to(socket.id).emit('message', adminHelp);}
-          else {io.to(socket.id).emit('message', cmdHelp);}
+          if(authList[senderName]['admin']) {io.to(socket.id).emit('message', Buffer.from(adminHelp).toString('base64'));}
+          else {io.to(socket.id).emit('message', Buffer.from(cmdHelp).toString('base64'));}
 
         // Promotion / demotion / ban code
         } else if (data.startsWith("?promote ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
