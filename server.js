@@ -72,7 +72,7 @@ io.on('connection', function(socket){
     if (authList[data[0]] !== undefined && authList[data[0]]['admin']) {
       header = "> Admin [<img src='/static/admin.png'>"}
     msg = Buffer.from(header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!").toString('base64');
-    setTimeout(function(){io.to(data[1]).emit('message', msg);}, 500);
+    setTimeout(function(){io.to(data[1]).emit('message', msg);}, 1000);
     if (data[1] == 'lobby') {
       //io.to(socket.id).emit('message', msgs);
       for (i in msgs) {
