@@ -248,7 +248,6 @@ io.on('connection', function(socket){
 
   // Log a new user account request
   socket.on('new user', function(data){
-    data = sanitize(data);
     if (data[0] == '' || data[1] == 0) {
       io.to(socket.id).emit('err', "Error: Username / password can not be blank!");
     } else if (authList[data[0]] !== undefined) {
