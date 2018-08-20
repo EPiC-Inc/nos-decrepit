@@ -6,6 +6,7 @@ var io = require('socket.io')(http);
 var url = require('url');
 var fs = require('fs');
 var sanitize = require('sanitize-html');
+var stdin = process.openStdin();
 
 // Variables
 var cmdHelp = "?llamafy @[username] : Turns the user into a llama!";
@@ -113,7 +114,7 @@ io.on('connection', function(socket){
             // Write to users.json
             content = JSON.stringify(authList);
             fs.writeFile("users.json", content, 'utf8', function (err) {
-              if (err) {return console.log(err);} else {io.emit('message', "> User successfully added!");}
+              if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully added!").toString('base64'));}
               console.log(splitData[1]+" was added by "+senderName+"!");});
           }
         } else if (data.startsWith("?rmuser ") && authList[senderName] !== undefined && authList[senderName]['admin']){
@@ -121,7 +122,7 @@ io.on('connection', function(socket){
           splitData = data.split(" ");
           if (splitData.length > 1) {
             if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
-              io.to(socket.id).emit('message', "> User not found!");
+              io.to(socket.id).emit('message', Buffer.from("> User not found!").toString('base64'));
             } else {
               for (key in users) {
                 if (users[key].name == splitData[1]) {
@@ -131,7 +132,7 @@ io.on('connection', function(socket){
               delete authList[splitData[1]];
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', "> User successfully removed!");}
+                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully removed!").toString('base64'));}
                 console.log(splitData[1]+" was removed by "+senderName+"!");});
             }
           }
@@ -149,12 +150,12 @@ io.on('connection', function(socket){
           // Promote
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
-              io.to(socket.id).emit('message', "> User not found!");
+              io.to(socket.id).emit('message', Buffer.from("> User not found!").toString('base64'));
             } else {
               authList[splitData[1]]['admin'] = true;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', "> User successfully promoted!");}
+                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully promoted!").toString('base64'));}
                 console.log(splitData[1]+" was promoted by "+senderName+"!");});
             }
 
@@ -162,12 +163,12 @@ io.on('connection', function(socket){
           // Demote
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
-              io.to(socket.id).emit('message', "> User not found!");
+              io.to(socket.id).emit('message', Buffer.from("> User not found!").toString('base64'));
             } else {
               authList[splitData[1]]['admin'] = false;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', "> User successfully demoted!");}
+                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully demoted!").toString('base64')");}
                 console.log(splitData[1]+" was demoted by "+senderName+"!");});
             }
           
@@ -175,7 +176,7 @@ io.on('connection', function(socket){
           // Ban
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
-            io.to(socket.id).emit('message', "> User not found!");
+            io.to(socket.id).emit('message', Buffer.from("> User not found!").toString('base64'));
             } else {
               for (key in users) {
                 if (users[key].name == splitData[1]) {
@@ -185,19 +186,19 @@ io.on('connection', function(socket){
               authList[splitData[1]]['active'] = false;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', "> User successfully banned!");}
+                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully banned!").toString('base64'));}
                 console.log(splitData[1]+" was banned by "+senderName+"!!!");});
             }
         } else if (data.startsWith("?unban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Un-ban
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
-              io.to(socket.id).emit('message', "> User not found!");
+              io.to(socket.id).emit('message', Buffer.from("> User not found!").toString('base64'));
             } else {
               authList[splitData[1]]['active'] = true;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', "> User successfully unbanned!");}
+                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully unbanned!").toString('base64'););}
                 console.log(splitData[1]+" was unbanned by "+senderName+"!");});
             }
         } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
@@ -205,7 +206,7 @@ io.on('connection', function(socket){
           send = false;
           splitData = data.split(" ");
           var packet = "<span style='background:cyan;'>> "+splitData[1]+" has been turned into a llama by "+senderName+"!</span>";
-          io.emit("message", packet);
+          io.emit("message", Buffer.from(packet).toString('base64'));
         }
       }
       if (send) {
@@ -270,6 +271,12 @@ io.on('connection', function(socket){
   });
 });
 
+stdin.addListener("data", function(d) {
+  packet = d.toString().trim()
+  msg = Buffer.from(packet).toString('base64');
+  io.emit("message", msg);
+  saveMessage(msg);
+});
 
 // Start the server
 http.listen(port, function(){
