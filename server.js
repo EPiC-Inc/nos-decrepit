@@ -16,6 +16,7 @@ var authList = require('./users.json');
 //console.log(authList);
 
 // This is so that the last 20 messages sent to 'lobby' will be recorded.
+// (mostly for liability issues)
 var msgs = [];
 function saveMessage(msg) {
   if (msgs.length < 20) {
@@ -23,7 +24,14 @@ function saveMessage(msg) {
   }
   else {
     msgs.splice(0, 1);
-    msgs.push(msg)
+    msgs.push(msg);
+  }
+}
+
+function returnMsgs(target) {
+  for (message in msgs) {
+    packet = Buffer.from(message).toString('base64');
+    io.to(target).emit(packet);
   }
 }
 
@@ -72,6 +80,7 @@ io.on('connection', function(socket){
     if (data[1] == 'lobby') {
       //io.to(socket.id).emit('message', msgs)
       io.to(data[1]).emit('message', msg);
+      returnMsgs(socket.id);
       saveMessage(msg);
     } else {
       io.to(data[1]).emit('message', msg);
