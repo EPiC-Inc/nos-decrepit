@@ -73,8 +73,8 @@ io.on('connection', function(socket){
     if (data[1] == 'lobby') {
       //io.to(socket.id).emit('message', msgs)
       io.to(data[1]).emit('message', msg);
-      for (message in msgs) {
-        packet = Buffer.from(message).toString('base64');
+      for (i in msgs) {
+        packet = Buffer.from(msgs[i]).toString('base64');
         io.to(socket.id).emit('message', packet);
       }
       saveMessage(msg);
