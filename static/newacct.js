@@ -42,7 +42,8 @@ function newAcct() {
   } else if (pwd.value == cPwd.value) {
     username = usr.value;
     password = hashCode(pwd.value);
-    console.log("test");
+    console.log(username);
+    console.log(password);
     socket.emit('new user', [username, password]);
   } else {
     document.getElementById("errors").innerHTML = "Error: Both passwords must match!";
