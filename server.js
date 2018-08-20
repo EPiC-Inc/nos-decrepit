@@ -28,13 +28,6 @@ function saveMessage(msg) {
   }
 }
 
-function returnMsgs(target) {
-  for (message in msgs) {
-    packet = Buffer.from(message).toString('base64');
-    io.to(target).emit(packet);
-  }
-}
-
 // Set the port (node server.js [port])
 // process.argv : 0:program 1:file 2:(in this case)port
 if (process.argv[2] == undefined) {
@@ -80,7 +73,10 @@ io.on('connection', function(socket){
     if (data[1] == 'lobby') {
       //io.to(socket.id).emit('message', msgs)
       io.to(data[1]).emit('message', msg);
-      returnMsgs(socket.id);
+      for (message in msgs) {
+        packet = Buffer.from(message).toString('base64');
+        io.to(socket.id).emit('message', packet);
+      }
       saveMessage(msg);
     } else {
       io.to(data[1]).emit('message', msg);
