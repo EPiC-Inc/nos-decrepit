@@ -69,7 +69,7 @@ io.on('connection', function(socket){
       header = "> Admin [<img src='/static/admin.png'>"}
     msg = Buffer.from(header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!").toString('base64')
     if (data[1] == 'lobby') {
-      io.to(socket.id).emit('message', msgs)
+      //io.to(socket.id).emit('message', msgs)
       io.to(data[1]).emit('message', msg);
       saveMessage(msg);
     } else {
