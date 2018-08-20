@@ -272,7 +272,7 @@ io.on('connection', function(socket){
 });
 
 stdin.addListener("data", function(d) {
-  packet = d.toString().trim()
+  packet = "<span style='background:cyan;'>SERVER ALERT > "+d.toString().trim()+"</span>";
   msg = Buffer.from(packet).toString('base64');
   io.emit("message", msg);
   saveMessage(msg);
