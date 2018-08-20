@@ -198,7 +198,7 @@ io.on('connection', function(socket){
               authList[splitData[1]]['active'] = true;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully unbanned!").toString('base64'););}
+                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully unbanned!").toString('base64'));}
                 console.log(splitData[1]+" was unbanned by "+senderName+"!");});
             }
         } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
