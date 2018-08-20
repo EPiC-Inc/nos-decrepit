@@ -14,6 +14,18 @@ var users = {};
 var authList = require('./users.json');
 //console.log(authList);
 
+// This is so that the last 20 messages sent to 'lobby' will be recorded.
+var msgs = [];
+function saveMessage(msg) {
+  if (msgs.length < 20) {
+    msgs.push(msg);
+  }
+  else {
+    msgs.splice(0, 1);
+    msgs.push(msg)
+  }
+}
+
 // Set the port (node server.js [port])
 // process.argv : 0:program 1:file 2:(in this case)port
 if (process.argv[2] == undefined) {
@@ -52,7 +64,14 @@ io.on('connection', function(socket){
     header='> User [';
     if (authList[data[0]] !== undefined && authList[data[0]]['admin']) {
       header = "> Admin [<img src='/static/admin.png'>"}
-    io.to(data[1]).emit('message', Buffer.from(header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!").toString('base64'));
+    msg = Buffer.from(header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!").toString('base64')
+    if (data[1] == 'lobby') {
+      io.to(socket.id).emit('message', msgs)
+      io.to(data[1]).emit('message', msg);
+      saveMessage(msg);
+    } else {
+      io.to(data[1]).emit('message', msg);
+    }
     }});
 
   // Auth
@@ -199,7 +218,13 @@ io.on('connection', function(socket){
         }
         data = data.substring(0, 256);
         var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
-        if(users[socket.id] !== undefined) {io.to(users[socket.id].room).emit('message', Buffer.from(packet).toString('base64'));}
+        if(users[socket.id] !== undefined) {
+          msg =  Buffer.from(packet).toString('base64');
+          io.to(users[socket.id].room).emit('message', msg);
+          if (users[socket.id].room == 'lobby') {
+            saveMessage(msg);
+          }
+        }
       }
     }
   });
