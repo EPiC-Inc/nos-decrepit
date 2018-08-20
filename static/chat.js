@@ -154,7 +154,7 @@ socket.on('users online', function(data){
 });
 
 socket.on("message", function(supadata){
-  console.log(data);
+  console.log(supadata);
   data = decodeURIComponent(escape(atob(String(supadata[1]))));
   // Add message
   var start='<div>'
