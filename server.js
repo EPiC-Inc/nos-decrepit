@@ -39,6 +39,9 @@ app.use('/static', express.static(__dirname + '/static'));
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/static/index.html');
 });
+app.get('/googleb7532997be74f84b.html', function(req, res){app		
+  res.sendFile(__dirname + '/googleb7532997be74f84b.html');		
+});
 
 // Upon a connection, keep it open via this callback
 io.on('connection', function(socket){
