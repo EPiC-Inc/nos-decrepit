@@ -196,18 +196,23 @@ io.on('connection', function(socket){
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
             io.to(socket.id).emit('message', Buffer.from("> User not found!").toString('base64'));
-            } else {
-              for (key in users) {
-                if (users[key].name == splitData[1]) {
-                  delete users[key];
-                }
+          } else {
+            for (key in users) {
+              if (users[key].name == splitData[1]) {
+                delete users[key];
               }
-              authList[splitData[1]]['active'] = false;
-              content = JSON.stringify(authList);
-              fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully banned!").toString('base64'));}
-                console.log(splitData[1]+" was banned by "+senderName+"!!!");});
             }
+            authList[splitData[1]]['active'] = false;
+            content = JSON.stringify(authList);
+            fs.writeFile("users.json", content, 'utf8', function (err) {
+              if (err) {
+                return console.log(err);
+              } else {
+                io.emit('message', Buffer.from("> User successfully banned!").toString('base64'));
+              }
+              console.log(splitData[1]+" was banned by "+senderName+"!!!");
+            });
+          }
         }else if (data.startsWith("?kick ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Kick
           splitData = data.split(" ");
@@ -236,9 +241,9 @@ io.on('connection', function(socket){
                 return console.log(err);
               } else {
                 io.emit('message', Buffer.from("> User successfully unbanned!").toString('base64'));
-                console.log(splitData[1]+" was unbanned by "+senderName+"!"));
+                console.log(splitData[1]+" was unbanned by "+senderName+"!");
               }
-            }
+            });
           }
         } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
           // Llamafy
