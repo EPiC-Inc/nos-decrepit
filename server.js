@@ -50,7 +50,7 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/static/index.html');
 });
 app.get('/googleb7532997be74f84b.html', function(req, res){
-  res.sendFile(__dirname + '/googleb7532997be74f84b.html');		
+  res.sendFile(__dirname + '/googleb7532997be74f84b.html');
 });
 
 // Upon a connection, keep it open via this callback
@@ -106,7 +106,7 @@ io.on('connection', function(socket){
       io.to(socket.id).emit('err', "Error: Username / password not recognized");
     } else {
       io.to(socket.id).emit('a-ok');
-    } 
+    }
   });
 
   // Message sending script allowing for username colors
@@ -190,7 +190,7 @@ io.on('connection', function(socket){
                 if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully demoted!").toString('base64'));}
                 console.log(splitData[1]+" was demoted by "+senderName+"!");});
             }
-          
+
         } else if (data.startsWith("?ban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Ban
           splitData = data.split(" ");
@@ -232,9 +232,10 @@ io.on('connection', function(socket){
               authList[splitData[1]]['active'] = true;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully unbanned!").toString('base64'));}
-                console.log(splitData[1]+" was unbanned by "+senderName+"!");
+                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully unbanned!").toString('base64'));
+                console.log(splitData[1]+" was unbanned by "+senderName+"!");}
             }
+          }
         } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
           // Llamafy
           send = false;
