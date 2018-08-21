@@ -158,7 +158,7 @@ io.on('connection', function(socket){
           var packet = "<span style='background:cyan;'>> "+data.substring(11)+"</span>";
           io.emit("message", Buffer.from(packet).toString('base64'));
         } else if (data == '?help') {
-          if(authList[senderName]['admin']) {io.to(socket.id).emit('message', Buffer.from(adminHelp).toString('base64'));}
+          if(authList[senderName]['admin']) {io.to(socket.id).emit('message', [datetimestring, Buffer.from(adminHelp).toString('base64')]);}
           else {io.to(socket.id).emit('message', Buffer.from(cmdHelp).toString('base64'));}
 
         // Promotion / demotion / ban code
@@ -222,7 +222,7 @@ io.on('connection', function(socket){
           send = false;
           splitData = data.split(" ");
           var packet = "<span style='background:cyan;'>> "+splitData[1]+" has been turned into a llama by "+senderName+"!</span>";
-          io.emit("message", Buffer.from(packet).toString('base64'));
+          io.emit("message", [datetimestring, Buffer.from(packet).toString('base64')]);
         }
       }
       if (send) {
