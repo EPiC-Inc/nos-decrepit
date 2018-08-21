@@ -6,6 +6,7 @@ var messages = document.getElementById("messages");
 var m = document.getElementById("messageSender");
 var users = document.getElementById("onlineUsers");
 var scroll = document.getElementById("scroll");
+var online = true;
 
 // Variables
 var room = '';
@@ -157,33 +158,38 @@ socket.on('users online', function(data){
 });
 
 socket.on("message", function(supadata){
-  console.log(supadata);
-  data = decodeURIComponent(escape(atob(String(supadata[1]))));
-  // Add message
-  var start='<div>'
-  if (!alertWaiting) {
-    if (!vis()) {changeIco('/static/msg.png');}
-  }
-  if (data.includes('@'+username) || data.includes('@everyone')) {
-    if (!vis()) {changeIco('/static/alert.png');}
-    alertWaiting = true;
-    start = '<div class="alert">';
-  }
-  var ds = data.split(' ');
-  dataSplit = [ds.shift(), ds.join(' ')];
-	if (!data.startsWith('>') && !dataSplit[1].includes('<iframe') && !dataSplit[1].includes('<img') && !dataSplit[1].includes('<a')) {
-  	dataSplit[1] = cUrl(dataSplit[1]);
-	}
-  data = dataSplit.join(' ');
-  $("#messages").append(supadata[0]+" "+start+data+"</div>");
-  if (scroll.checked) {
-    window.scrollTo(0,document.body.scrollHeight);
+  if (online) {
+    console.log(supadata);
+    data = decodeURIComponent(escape(atob(String(supadata[1]))));
+    // Add message
+    var start='<div>'
+    if (!alertWaiting) {
+      if (!vis()) {changeIco('/static/msg.png');}
+    }
+    if (data.includes('@'+username) || data.includes('@everyone')) {
+      if (!vis()) {changeIco('/static/alert.png');}
+      alertWaiting = true;
+      start = '<div class="alert">';
+    }
+    var ds = data.split(' ');
+    dataSplit = [ds.shift(), ds.join(' ')];
+  	if (!data.startsWith('>') && !dataSplit[1].includes('<iframe') && !dataSplit[1].includes('<img') && !dataSplit[1].includes('<a')) {
+    	dataSplit[1] = cUrl(dataSplit[1]);
+  	}
+    data = dataSplit.join(' ');
+    $("#messages").append(supadata[0]+" "+start+data+"</div>");
+    if (scroll.checked) {
+      window.scrollTo(0,document.body.scrollHeight);
+    }
   }
 });
 
 socket.on("disconnect", function(reason){
-  $("#messages").append("<div>> Connection terminated. <</div>");
-  window.scrollTo(0,document.body.scrollHeight);
-	changeIco('/static/disconnect.png');
-  console.log(reason);
+  if (online) {
+    online = false;
+    $("#messages").append("<div>> Connection terminated. <</div>");
+    window.scrollTo(0,document.body.scrollHeight);
+  	changeIco('/static/disconnect.png');
+    console.log(reason);
+  }
 });
