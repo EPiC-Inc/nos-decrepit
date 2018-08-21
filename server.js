@@ -295,7 +295,7 @@ stdin.addListener("data", function(d) {
   packet = "<span style='background:cyan;'><span class='alert'>SERVER ALERT</span> > "+d.toString().trim()+"</span>";
   msg = Buffer.from(packet).toString('base64');
   io.emit("message", [datetimestring, msg]);
-  saveMessage(msg);
+  saveMessage([datetimestring, msg]);
 });
 
 // Start the server
