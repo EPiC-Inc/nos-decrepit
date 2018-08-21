@@ -156,7 +156,10 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?broadcast ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           send = false;
           var packet = "<span style='background:cyan;'>> "+data.substring(11)+"</span>";
-          io.emit("message", Buffer.from(packet).toString('base64'));
+          msg = Buffer.from(packet).toString('base64');
+          io.emit("message", [datetimestring, msg]);
+          saveMessage([datetimestring, msg]);
+
         } else if (data == '?help') {
           if(authList[senderName]['admin']) {io.to(socket.id).emit('message', [datetimestring, Buffer.from(adminHelp).toString('base64')]);}
           else {io.to(socket.id).emit('message', Buffer.from(cmdHelp).toString('base64'));}
@@ -289,7 +292,7 @@ io.on('connection', function(socket){
 
 stdin.addListener("data", function(d) {
   datetimestring = toLocalTime().toLocaleString() ///datetime
-  packet = "<span style='background:cyan;'>SERVER ALERT > "+d.toString().trim()+"</span>";
+  packet = "<span style='background:cyan;'><span class='alert'>SERVER ALERT</span> > "+d.toString().trim()+"</span>";
   msg = Buffer.from(packet).toString('base64');
   io.emit("message", [datetimestring, msg]);
   saveMessage(msg);
