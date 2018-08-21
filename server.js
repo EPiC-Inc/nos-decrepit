@@ -288,9 +288,10 @@ io.on('connection', function(socket){
 });
 
 stdin.addListener("data", function(d) {
+  datetimestring = toLocalTime().toLocaleString() ///datetime
   packet = "<span style='background:cyan;'>SERVER ALERT > "+d.toString().trim()+"</span>";
   msg = Buffer.from(packet).toString('base64');
-  io.emit("message", msg);
+  io.emit("message", [datetimestring, msg]);
   saveMessage(msg);
 });
 
