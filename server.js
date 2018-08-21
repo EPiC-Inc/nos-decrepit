@@ -220,6 +220,7 @@ io.on('connection', function(socket){
                   io.to(i).emit('disconnect', 'get kicked bro');
                   console.log(splitData[1]+" was kicked by "+senderName+"!");
                   delete users[i];
+                }
               }
             }
         } else if (data.startsWith("?unban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
