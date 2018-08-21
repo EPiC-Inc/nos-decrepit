@@ -236,7 +236,7 @@ io.on('connection', function(socket){
                 return console.log(err);
               } else {
                 io.emit('message', Buffer.from("> User successfully unbanned!").toString('base64'));
-                console.log(splitData[1]+" was unbanned by "+senderName+"!");
+                console.log(splitData[1]+" was unbanned by "+senderName+"!"));
               }
             }
           }
