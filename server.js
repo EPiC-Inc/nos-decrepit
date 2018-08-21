@@ -208,6 +208,20 @@ io.on('connection', function(socket){
                 if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully banned!").toString('base64'));}
                 console.log(splitData[1]+" was banned by "+senderName+"!!!");});
             }
+        }else if (data.startsWith("?kick ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
+          // Kick
+          splitData = data.split(" ");
+          if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
+              io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
+            } else {
+              io.emit('message', [datetimestring, Buffer.from("> User kicked!").toString('base64')]);
+              for (i in users) {
+                if (users[i].name == splitData[1] && users[i].room == users[socket.id].room) {
+                  io.to(i).emit('disconnect', 'get kicked bro');
+                  console.log(splitData[1]+" was kicked by "+senderName+"!");
+                  delete users[i];
+              }
+            }
         } else if (data.startsWith("?unban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Un-ban
           splitData = data.split(" ");
