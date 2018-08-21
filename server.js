@@ -227,13 +227,17 @@ io.on('connection', function(socket){
           // Un-ban
           splitData = data.split(" ");
           if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
-              io.to(socket.id).emit('message', Buffer.from("> User not found!").toString('base64'));
-            } else {
-              authList[splitData[1]]['active'] = true;
-              content = JSON.stringify(authList);
-              fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', Buffer.from("> User successfully unbanned!").toString('base64'));
-                console.log(splitData[1]+" was unbanned by "+senderName+"!");}
+            io.to(socket.id).emit('message', Buffer.from("> User not found!").toString('base64'));
+          } else {
+            authList[splitData[1]]['active'] = true;
+            content = JSON.stringify(authList);
+            fs.writeFile("users.json", content, 'utf8', function (err) {
+              if (err) {
+                return console.log(err);
+              } else {
+                io.emit('message', Buffer.from("> User successfully unbanned!").toString('base64'));
+                console.log(splitData[1]+" was unbanned by "+senderName+"!");
+              }
             }
           }
         } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
