@@ -13,6 +13,9 @@ var menuOpen = false;
 var online = []
 var alertWaiting = false;
 
+// Query users upon login, may cause lag but better for aesthetics
+socket.emit('query');
+
 //Functions
 //Change favicon
 function changeIco(ref) {
