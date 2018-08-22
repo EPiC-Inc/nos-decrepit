@@ -303,7 +303,7 @@ io.on('connection', function(socket){
   socket.on('new user', function(data){
     if (data[0] == '' || data[1] == 0) {
       io.to(socket.id).emit('err', "Error: Username / password can not be blank!");
-    } else if (data[0].contains(' ')) {
+    } else if (data[0].indexOf(' ') !== -1) {
       io.to(socket.id).emit('err', "Please no spaces in usernames, it's hard on my code")
     } else if (authList[data[0]] !== undefined) {
       io.to(socket.id).emit('err', "Error: Username already in use!");
