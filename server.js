@@ -269,7 +269,7 @@ io.on('connection', function(socket){
             if (users[socketid].name == splitData[1]) {online=true;recvid=socketid;}
           }
           if (splitData.length < 3 || !online || users[recvid] == undefined) {
-            io.to(socket.id).emit('message', [datetimetring, Buffer.from("> User doesn't exist or isn't online!").toString('base64')]);
+            io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User doesn't exist or isn't online!").toString('base64')]);
           } else {
             var header = '[PRIVATE MESSAGE FROM ';
             if (authList[senderName]['admin']) {
