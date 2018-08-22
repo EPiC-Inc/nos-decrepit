@@ -97,13 +97,20 @@ io.on('connection', function(socket){
   socket.on('auth', function(data){
     var user = data[0];
     var pwd = data[1];
+    for (stored_user in authList) {
+      if (stored_user.toLowerCase() == user.toLowerCase()) {
+        user = stored_user;
+      }
+    }
     var uData = authList[user];
     //console.log(data);
     //console.log(uData);
     if (uData !== undefined && !uData.active) {
       io.to(socket.id).emit('err', "Error: You have been banned!");
-    } else if (uData == undefined || uData.pass !== pwd) {
-      io.to(socket.id).emit('err', "Error: Username / password not recognized");
+    } else if (uData == undefined) {
+      io.to(socket.id).emit('err', "Error: Username not found.");
+    } else if (uData.pass !== pwd) {
+      io.to(socket.id).emit('err', "Error: Incorrect password.");
     } else {
       io.to(socket.id).emit('a-ok');
     }
