@@ -259,6 +259,25 @@ io.on('connection', function(socket){
               }
             });
           }
+        } else if (data.startsWith("?pm ")) {
+          send = false;
+          splitData = data.split(" ");
+          if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
+          online=false;
+          recvid='';
+          for (socketid in users){
+            if (users[socketid].name == splitData[1]) {online=true;recvid=socketid;}
+          }
+          if (splitData.length < 3 || !online || users[recvid] == undefined) {
+            io.to(socket.id).emit('message', [datetimetring, Buffer.from("> User doesn't exist or isn't online!").toString('base64')]);
+          } else {
+            var header = '[PRIVATE MESSAGE FROM ';
+            if (authList[senderName]['admin']) {
+              header = "[PRIVATE MESSAGE FROM <img src='/static/admin.png'>";
+            }
+            packet = header+users[socket.id].name+" : "+splitData[2];
+            io.to(recvid).emit('message', [datetimestring, Buffer.from(packet).toString("base64")]);
+          }
         } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
           // Llamafy
           send = false;
