@@ -275,7 +275,7 @@ io.on('connection', function(socket){
             if (authList[senderName]['admin']) {
               header = "[PRIVATE MESSAGE FROM <img src='/static/admin.png'>";
             }
-            packet = header+users[socket.id].name+" : "+splitData[2];
+            packet = header+users[socket.id].name+"] : "+splitData[2];
             io.to(recvid).emit('message', [datetimestring, Buffer.from(packet).toString("base64")]);
           }
         } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
