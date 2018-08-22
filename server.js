@@ -303,10 +303,21 @@ io.on('connection', function(socket){
   socket.on('new user', function(data){
     if (data[0] == '' || data[1] == 0) {
       io.to(socket.id).emit('err', "Error: Username / password can not be blank!");
+    } else if (data[0].contains(' ')) {
+      io.to(socket.id).emit('err', "Please no spaces in usernames, it's hard on my code")
     } else if (authList[data[0]] !== undefined) {
       io.to(socket.id).emit('err', "Error: Username already in use!");
     } else {
-      newUser = {
+      is_taken = false
+      for (stored_user in authList) {
+        //console.log(stored_user, user);
+        if (stored_user.toLowerCase() == user.toLowerCase()) {
+          io.to(socket.id).emit('err', "Error: Username already in use!");
+          is_taken = true
+        }
+      }
+      if (!is_taken) {
+        newUser = {
               "active":true,
               "admin":false,
               "nameStyle":"",
@@ -318,7 +329,8 @@ io.on('connection', function(socket){
             fs.writeFile("users.json", content, 'utf8', function (err) {
               if (err) {return console.log(err);} else {
               console.log(data[0]+" has signed up!");}});
-      io.to(socket.id).emit('err', "Success! You may now log in.");
+        io.to(socket.id).emit('err', "<span style='color:blue'>Success! You may now log in.</span>");
+      }
     }
   });
 });
