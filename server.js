@@ -9,8 +9,8 @@ var sanitize = require('sanitize-html');
 var stdin = process.openStdin();
 
 // Variables
-var cmdHelp = "?llamafy @[username] : Turns the user into a llama!";
-var adminHelp = "?adduser [user] [hash] : Adds a user<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg under _System<br>?ban [user] : Bans a user from the chat"
+var cmdHelp = "?llamafy @[username] : Turns the user into a llama! (it's a joke)";
+var adminHelp = "?llamafy @[username] : Turns the user into a llama!<br>?adduser [user] [hash] : Adds a user<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg to everyone on<br>?ban [user] : Bans a user from the chat"
 var users = {};
 var authList = require('./users.json');
 //console.log(authList);
@@ -148,6 +148,7 @@ io.on('connection', function(socket){
             if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
               io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
             } else {
+              if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
               for (key in users) {
                 if (users[key].name == splitData[1]) {
                   delete users[key];
@@ -179,6 +180,7 @@ io.on('connection', function(socket){
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
               io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
             } else {
+              if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
               authList[splitData[1]]['admin'] = true;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
@@ -192,6 +194,7 @@ io.on('connection', function(socket){
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
               io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
             } else {
+              if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
               authList[splitData[1]]['admin'] = false;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
@@ -205,6 +208,7 @@ io.on('connection', function(socket){
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
             io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
           } else {
+            if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
             for (key in users) {
               if (users[key].name == splitData[1]) {
                 delete users[key];
@@ -227,7 +231,7 @@ io.on('connection', function(socket){
           if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
               io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
             } else {
-              io.emit('message', [datetimestring, Buffer.from("> User kicked!").toString('base64')]);
+              if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
               for (i in users) {
                 if (users[i].name == splitData[1] && users[i].room == users[socket.id].room) {
                   io.to(i).emit('disconnect', 'get kicked bro');
@@ -235,6 +239,7 @@ io.on('connection', function(socket){
                   delete users[i];
                 }
               }
+              io.emit('message', [datetimestring, Buffer.from("> User kicked!").toString('base64')]);
             }
         } else if (data.startsWith("?unban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Un-ban
@@ -242,6 +247,7 @@ io.on('connection', function(socket){
           if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
             io.to(socket.id).emit('message', [datetimetring, Buffer.from("> User not found!").toString('base64')]);
           } else {
+            if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
             authList[splitData[1]]['active'] = true;
             content = JSON.stringify(authList);
             fs.writeFile("users.json", content, 'utf8', function (err) {
