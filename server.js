@@ -272,11 +272,17 @@ io.on('connection', function(socket){
             io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User doesn't exist or isn't online!").toString('base64')]);
           } else {
             var header = '[PRIVATE MESSAGE FROM ';
+            var header2= '[MESSAGE TO ';
             if (authList[senderName]['admin']) {
               header = "[PRIVATE MESSAGE FROM <img src='/static/admin.png'>";
             }
+            if (authList[splitData[1]]['admin']) {
+              header2 = "[MESSAGE TO <img src='/static/admin.png'>";
+            }
             packet = header+users[socket.id].name+"] : "+splitData[2];
+            packet2 = header2+splitData[1]+"] : "+splitData[2];
             io.to(recvid).emit('message', [datetimestring, Buffer.from(packet).toString("base64")]);
+            io.to(socket.id).emit('message', [datetimestring, Buffer.from(packet2).toString("base64")]);
           }
         } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
           // Llamafy
