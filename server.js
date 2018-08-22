@@ -311,7 +311,7 @@ io.on('connection', function(socket){
       is_taken = false
       for (stored_user in authList) {
         //console.log(stored_user, user);
-        if (stored_user.toLowerCase() == user.toLowerCase()) {
+        if (stored_user.toLowerCase() == data[0].toLowerCase()) {
           io.to(socket.id).emit('err', "Error: Username already in use!");
           is_taken = true
         }
