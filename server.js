@@ -148,7 +148,9 @@ io.on('connection', function(socket){
             if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
               io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
             } else {
+              console.log(splitData);
               if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
+              console.log(splitData);
               for (key in users) {
                 if (users[key].name == splitData[1]) {
                   delete users[key];
