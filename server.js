@@ -98,7 +98,7 @@ io.on('connection', function(socket){
     var user = data[0];
     var pwd = data[1];
     for (stored_user in authList) {
-      console.log(stored_user, user);
+      //console.log(stored_user, user);
       if (stored_user.toLowerCase() == user.toLowerCase()) {
         user = stored_user;
       }
@@ -113,7 +113,7 @@ io.on('connection', function(socket){
     } else if (uData.pass !== pwd) {
       io.to(socket.id).emit('err', "Error: Incorrect password.");
     } else {
-      io.to(socket.id).emit('a-ok');
+      io.to(socket.id).emit('a-ok', user);
     }
   });
 

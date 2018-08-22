@@ -56,8 +56,9 @@ socket.on('err', function(data){
   pwd.value='';
 });
 
-socket.on('a-ok', function(){
-  document.cookie='user='+username;
+socket.on('a-ok', function(data){
+  username = data;
+  document.cookie='user='+data;
   document.cookie='key='+password;
   window.location.replace("/static/coms.html");
 });
