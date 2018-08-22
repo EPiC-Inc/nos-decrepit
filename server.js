@@ -145,12 +145,10 @@ io.on('connection', function(socket){
           // Remove a user
           splitData = data.split(" ");
           if (splitData.length > 1) {
+            if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
             if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
               io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
             } else {
-              console.log(splitData);
-              if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
-              console.log(splitData);
               for (key in users) {
                 if (users[key].name == splitData[1]) {
                   delete users[key];
@@ -179,10 +177,10 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?promote ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Promote
           splitData = data.split(" ");
+          if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
               io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
             } else {
-              if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
               authList[splitData[1]]['admin'] = true;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
@@ -193,10 +191,10 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?demote ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Demote
           splitData = data.split(" ");
+          if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
               io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
             } else {
-              if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
               authList[splitData[1]]['admin'] = false;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
@@ -207,10 +205,10 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?ban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Ban
           splitData = data.split(" ");
+          if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
           if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
             io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
           } else {
-            if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
             for (key in users) {
               if (users[key].name == splitData[1]) {
                 delete users[key];
@@ -230,10 +228,10 @@ io.on('connection', function(socket){
         }else if (data.startsWith("?kick ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Kick
           splitData = data.split(" ");
+          if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
           if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
               io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
             } else {
-              if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
               for (i in users) {
                 if (users[i].name == splitData[1] && users[i].room == users[socket.id].room) {
                   io.to(i).emit('disconnect', 'get kicked bro');
@@ -246,10 +244,10 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?unban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Un-ban
           splitData = data.split(" ");
+          if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
           if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
             io.to(socket.id).emit('message', [datetimetring, Buffer.from("> User not found!").toString('base64')]);
           } else {
-            if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
             authList[splitData[1]]['active'] = true;
             content = JSON.stringify(authList);
             fs.writeFile("users.json", content, 'utf8', function (err) {
