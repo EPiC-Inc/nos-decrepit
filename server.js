@@ -98,6 +98,7 @@ io.on('connection', function(socket){
     var user = data[0];
     var pwd = data[1];
     for (stored_user in authList) {
+      console.log(stored_user, user);
       if (stored_user.toLowerCase() == user.toLowerCase()) {
         user = stored_user;
       }
