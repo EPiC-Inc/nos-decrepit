@@ -300,11 +300,11 @@ io.on('connection', function(socket){
           header = "<img src='/static/admin.png'>"}
 
         // Graft together an unnecessarily complicated packet =)
-        console.log('test1');
+        //console.log('test1');
         if (senderName !== '_System') { // If the user isn't _System, sanitize their input
           data = data.split('>').join('&gt;');
           data = data.split('<').join('&lt;');
-          console.log('test');
+          //console.log('test');
         }
         data = data.substring(0, 256);
         var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
