@@ -279,9 +279,10 @@ io.on('connection', function(socket){
             if (authList[splitData[1]]['admin']) {
               header2 = "[MESSAGE TO <img src='/static/admin.png'>";
             }
+            toField = splitData[1];
             splitData.splice(0, 2);
             packet = header+users[socket.id].name+"] : "+splitData.join(' ');
-            packet2 = header2+splitData[1]+"] : "+splitData.join(' ');
+            packet2 = header2+toField+"] : "+splitData.join(' ');
             io.to(recvid).emit('message', [datetimestring, Buffer.from(packet).toString("base64")]);
             io.to(socket.id).emit('message', [datetimestring, Buffer.from(packet2).toString("base64")]);
           }
