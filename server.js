@@ -304,9 +304,10 @@ io.on('connection', function(socket){
           data = sanitize(data, {
   allowedTags: sanitize.defaults.allowedTags.concat([ 'img', 'marquee' ])
 });
+          data = data.split('>').join('&gt;');
+          data = data.split('<').join('&lt;');
         }
         data = data.substring(0, 256);
-        data = '<pre>'+data+'</pre>';
         var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
         if(users[socket.id] !== undefined) {
           msg = Buffer.from(packet).toString('base64');
