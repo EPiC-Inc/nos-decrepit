@@ -21,7 +21,7 @@
     "express": "^4.16.3",
     "markdown": "^0.5.0",
     "npm": "^5.8.0",
-    "sanitize-html": "^1.18.2",
-    "socket.io": "^2.1.0"
+    "sanitize-html": "^1.18.4",
+    "socket.io": "^2.1.1"
   }
 }
