@@ -9,8 +9,8 @@ var sanitize = require('sanitize-html');
 var stdin = process.openStdin();
 
 // Variables
-var cmdHelp = "?llamafy @[username] : Turns the user into a llama! (it's a joke)";
-var adminHelp = "?llamafy @[username] : Turns the user into a llama!<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg to everyone on<br>?ban [user] : Bans a user from the chat<br>?unban [user] : Unbans a banned user"
+var cmdHelp = "?llamafy @[username] : Turns the user into a llama! (it's a joke)<br>?color [color / hex code] : Sets your name color";
+var adminHelp = cmdHelp + "<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg to everyone on<br>?ban [user] : Bans a user from the chat<br>?unban [user] : Unbans a banned user<br>?kick [user] : Temporarily disconnects a user";
 var users = {};
 var authList = require('./users.json');
 //console.log(authList);
