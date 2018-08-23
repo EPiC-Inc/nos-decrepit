@@ -14,6 +14,10 @@ var menuOpen = false;
 var online = []
 var alertWaiting = false;
 
+// XSS protection
+var xss_prot_check = document.getElementById("xss_prot"); // menu checkbox
+var xss_prot_phrase = []; // list of texts that could be xss
+
 // Query users upon login, may cause lag but better for aesthetics
 socket.emit('query');
 
@@ -86,6 +90,42 @@ function sendMsg() {
     socket.emit('message', btoa(unescape(encodeURIComponent(m.value))));
     m.value = '';
   }
+}
+
+/* 
+XSS Protection by Estrel Steel
+All addition variables and functions begin with 'xss_prot_'
+*/
+
+//@requires index of text in xss_prot_phrase
+//@ensures text will be added to the screen
+function xss_prot_release(i) {
+	document.getElementById("xss_prot_msg_" + i).innerHTML = xss_prot_phrase[i];
+	document.getElementById("xss_prot_button_" + i).style.display = 'none';
+	// This line bellow is needed to execute any xss, I couldn't find a better implementation.
+	$("#messages").append("<div style=\"display:none;\">" + xss_prot_phrase[i] + "</div>");
+}
+
+//@requires the message that has xss
+//@ensures the message will be added to xss_prot_phrase
+//@ensures html for button which will show text if pushed
+function xss_prot_store(data) {
+	var i = xss_prot_phrase.push(data); // new length
+	i = i - 1; // elem that was pushed
+	var msg = "<button id=\"xss_prot_button_" + i + "\" style='font-size:15px;' onclick=\"xss_prot_release(" + i + ");\">Show XSS Content</button>"
+	msg = msg + "<p id=\"xss_prot_msg_" + i + "\"></p>"
+	return msg;
+}
+
+//@requires the message that should be checked
+//@ensures if has xss then html for the button
+//@ensures if no xss then unaltered data
+function xss_prot_handle(data) {
+	if(data.includes("<script")) {
+		console.log("XSS JS detected.");
+		return xss_prot_store(data);
+	}
+	return data;
 }
 
 function menu() {
@@ -177,6 +217,10 @@ socket.on("message", function(supadata){
     	dataSplit[1] = cUrl(dataSplit[1]);
   	}
     data = dataSplit.join(' ');
+    
+    // Line which protects from xss if requested in menu.
+    if(xss_prot_check.checked) data = xss_prot_handle(data);
+    
     $("#messages").append(supadata[0]+" "+start+data+"</div>");
     if (scroll.checked) {
       window.scrollTo(0,document.body.scrollHeight);
