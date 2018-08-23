@@ -301,7 +301,7 @@ io.on('connection', function(socket){
 
         // Graft together an unnecessarily complicated packet =)
         console.log('test1');
-        if (authList[users[socket.id]] /*&& senderName !== '_System'*/) { // If the user isn't _System, sanitize their input
+        if (senderName !== '_System') { // If the user isn't _System, sanitize their input
           data = data.split('>').join('&gt;');
           data = data.split('<').join('&lt;');
           console.log('test');
