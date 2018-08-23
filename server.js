@@ -280,8 +280,8 @@ io.on('connection', function(socket){
               header2 = "[MESSAGE TO <img src='/static/admin.png'>";
             }
             splitData = splitData.splice(0, 2);
-            packet = header+users[socket.id].name+"] : "+' '.join(splitData);
-            packet2 = header2+splitData[1]+"] : "+' '.join(splitData);
+            packet = header+users[socket.id].name+"] : "+splitData.join(' ');
+            packet2 = header2+splitData[1]+"] : "+splitData.join(' ');
             io.to(recvid).emit('message', [datetimestring, Buffer.from(packet).toString("base64")]);
             io.to(socket.id).emit('message', [datetimestring, Buffer.from(packet2).toString("base64")]);
           }
