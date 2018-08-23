@@ -286,6 +286,24 @@ io.on('connection', function(socket){
             io.to(recvid).emit('message', [datetimestring, Buffer.from(packet).toString("base64")]);
             io.to(socket.id).emit('message', [datetimestring, Buffer.from(packet2).toString("base64")]);
           }
+          
+        } else if (data.startsWith("?color ") && authList[senderName] !== undefined) {
+          // Set the name color of the person running the command
+          splitData = data.split(" "); 
+          if (authList[senderName] == undefined) {
+            io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
+          } else {
+            authList[senderName]['nameStyle'] = "color:"+splitData[1];
+            content = JSON.stringify(authList);
+            fs.writeFile("users.json", content, 'utf8', function (err) {
+              if (err) {
+                return console.log(err);
+              } else {
+                io.emit('message', [datetimestring, Buffer.from("> Color changed!").toString('base64')]);
+              }
+            });
+          }
+          
         } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
           // Llamafy
           send = false;
@@ -319,6 +337,9 @@ io.on('connection', function(socket){
     }
   });
 
+  
+  
+  
   // User querying
   socket.on('query', function(){
     if (users[socket.id] !== undefined) {
