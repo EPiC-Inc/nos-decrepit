@@ -300,7 +300,7 @@ io.on('connection', function(socket){
           header = "<img src='/static/admin.png'>"}
 
         // Graft together an unnecessarily complicated packet =)
-        if (authList[users[socket.id]] && !authList[users[socket.id].name]['admin']) { // If the user isn't admin, sanitize their input
+        if (authList[users[socket.id]] && users[socket.id].name == '_System') { // If the user isn't _System, sanitize their input
           data = sanitize(data, {
   allowedTags: sanitize.defaults.allowedTags.concat([ 'img', 'marquee' ])
 });
