@@ -306,6 +306,7 @@ io.on('connection', function(socket){
 });
         }
         data = data.substring(0, 256);
+        data = '<pre>'+data+'</pre>';
         var packet = "["+header+"<span style='"+authList[senderName]['nameStyle']+"'>"+senderName+"</span>] "+data;
         if(users[socket.id] !== undefined) {
           msg = Buffer.from(packet).toString('base64');
