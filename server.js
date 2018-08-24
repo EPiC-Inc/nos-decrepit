@@ -312,6 +312,7 @@ io.on('connection', function(socket){
           io.emit("message", [datetimestring, Buffer.from(packet).toString('base64')]);
 // EMBEDDING OF IMAGES AND YOUTUBE VIDS
         } else if (data.startsWith("?img ")) {
+          splitData = data.split(" ");
           var imgpacket = "<img src='"+splitData[1]+"' />";
           io.to(users[socket.id].room).emit([datetimestring, Buffer.from(imgpacket).toString('base64')]);
         }
