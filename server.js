@@ -311,9 +311,10 @@ io.on('connection', function(socket){
           var packet = "<span style='background:cyan;'>> "+splitData[1]+" has been turned into a llama by "+senderName+"!</span>";
           io.emit("message", [datetimestring, Buffer.from(packet).toString('base64')]);
 // EMBEDDING OF IMAGES AND YOUTUBE VIDS
+
         } else if (data.startsWith("?img ")) {
           splitData = data.split(" ");
-          var imgpacket = "<img src='"+splitData[1]+"' />";
+          var imgpacket = "<img src='"+splitData[1]+"' /><a></a>";
           io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from(imgpacket).toString('base64')]);
         }
       }
