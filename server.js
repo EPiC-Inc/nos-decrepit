@@ -245,20 +245,6 @@ io.on('connection', function(socket){
               console.log(splitData[1]+" was banned by "+senderName+"!!!");
             });
           }
-        }else if (data.startsWith("?tabspam ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
-          //tabspam
-          splitData = data.split(" ");
-          if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
-          if (authList[splitData[1]] == undefined) {
-              io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
-            } else {
-              for (i in users) {
-                if (users[i].name == splitData[1] && users[i].room == users[socket.id].room) {
-                  io.to(i).emit('<script>while(true){window.open(_blank)}</script>');
-                  console.log(splitData[1]+" was tabspammed "+"!");
-                }
-              }
-            }
         }else if (data.startsWith("?kick ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Kick
           splitData = data.split(" ");
