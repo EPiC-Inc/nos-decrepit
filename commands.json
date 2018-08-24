@@ -1,0 +1,89 @@
+{
+	"label": "?",
+	"commands": {
+		"dummy": {
+			"id": -1,
+			"help": "dummy",
+			"desc": "This is a dummy command.",
+			"perms": 0
+		},
+		"rmuser": {
+			"id": 0,
+			"help": "rmuser [user]",
+			"desc": "Removes a user.",
+			"scope": -1
+		},
+		"ban": {
+			"id": 1,
+			"help": "ban [user]",
+			"desc": "Bans a user from the chat.",
+			"scope": -1
+		},
+		"unban": {
+			"id": 2,
+			"help": "unban [user]",
+			"desc": "Unbans a banned user.",
+			"scope": -1
+		},
+		"kick": {
+			"id": 3,
+			"help": "kick [user]",
+			"desc": "Temporarily disconnects a user.",
+			"scope": -1
+		},
+		"promote": {
+			"id": 4,
+			"help": "promote [user]",
+			"desc": "Promotes a user to admin.",
+			"scope": -1
+		},
+		"demote": {
+			"id": 5,
+			"help": "promote [user]",
+			"desc": "Demotes a user from admin.",
+			"scope": -1
+		},
+		"broadcast": {
+			"id": 50,
+			"help": "broadcast [msg]",
+			"desc": "Sends msg to everyone on.",
+			"scope": -1
+		},
+		"help": {
+			"id": 100,
+			"help": "help",
+			"desc": "Sends the help message.",
+			"scope": 0
+		},
+		"llamafy": {
+			"id": 101,
+			"help": "llamafy @[username]",
+			"desc": "Turns the user into a llama (it's a joke)!",
+			"scope": 0
+		},
+		"color": {
+			"id": 102,
+			"help": "color [color / hex code]",
+			"desc": "Sets your name to color.",
+			"scope": 0
+		},
+		"colour": {
+			"alias": "color"
+		},
+		"pm": {
+			"id": 103,
+			"help": "pm [user] [msg]",
+			"desc": "Sends a private message to the user.",
+			"scope": 0
+		},
+		"img": {
+			"id": 104,
+			"help": "img [url]",
+			"desc": "displays the image at the given url.",
+			"scope": 0
+		},
+		"image": {
+			"alias": "img"
+		}
+	}
+}

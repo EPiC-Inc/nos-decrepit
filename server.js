@@ -9,6 +9,7 @@ var sanitize = require('sanitize-html');
 var stdin = process.openStdin();
 
 // Variables
+var command = require("./commands.js");
 var cmdHelp = "?llamafy @[username] : Turns the user into a llama! (it's a joke)<br>?color [color / hex code] : Sets your name color<br>?img [link to image] : Inserts an image";
 var adminHelp = cmdHelp + "<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg to everyone on<br>?ban [user] : Bans a user from the chat<br>?unban [user] : Unbans a banned user<br>?kick [user] : Temporarily disconnects a user";
 var users = {};
@@ -144,7 +145,7 @@ io.on('connection', function(socket){
     if (users[socket.id] !== undefined && data !== undefined && data !== null) {
       datetimestring = toLocalTime().toLocaleString() ///datetime
       var senderName = users[socket.id].name;
-      if (data.startsWith("?")) {
+      if(command.isCommand(data)) {
         /*if (data.startsWith("?adduser ") && authList[senderName] !== undefined &&authList[senderName]['admin']) {
           splitData = data.split(" ");
           if (splitData.length > 2 && !isNaN(splitData[2]) && authList[splitData[1]] == undefined) {
@@ -161,7 +162,11 @@ io.on('connection', function(socket){
               if (err) {return console.log(err);} else {io.emit('message', [datetimestring, Buffer.from("> User successfully added!").toString('base64')]);}
               console.log(splitData[1]+" was added by "+senderName+"!");});
           }
-        } else */if (data.startsWith("?rmuser ") && authList[senderName] !== undefined && authList[senderName]['admin']){
+        } else */
+        
+        var cmd = command.getCommand(data);
+        // rmuser command
+        if (command.getCommandID(cmd) == 0 && authList[senderName] !== undefined && authList[senderName]['admin']){
           // Remove a user
           splitData = data.split(" ");
           if (splitData.length > 1) {
@@ -181,20 +186,24 @@ io.on('connection', function(socket){
                 console.log(splitData[1]+" was removed by "+senderName+"!");});
             }
           }
-          // Broadcast code
-        } else if (data.startsWith("?broadcast ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
+        }
+        // broadcast command
+        else if (command.getCommandID(cmd) == 50 && authList[senderName] !== undefined && authList[senderName]['admin']) {
           send = false;
           var packet = "<span style='background:cyan;'>> "+data.substring(11)+"</span>";
           msg = Buffer.from(packet).toString('base64');
           io.emit("message", [datetimestring, msg]);
           saveMessage([datetimestring, msg]);
 
-        } else if (data == '?help') {
+        }
+        // help command
+        else if (command.getCommandID(cmd) == 100) {
           if(authList[senderName]['admin']) {io.to(socket.id).emit('message', [datetimestring, Buffer.from(adminHelp).toString('base64')]);}
           else {io.to(socket.id).emit('message', [datetimestring, Buffer.from(cmdHelp).toString('base64')]);}
 
-        // Promotion / demotion / ban code
-        } else if (data.startsWith("?promote ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
+        }
+        // promote command
+        else if (command.getCommandID(cmd) == 4 && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Promote
           splitData = data.split(" ");
           if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
@@ -208,7 +217,9 @@ io.on('connection', function(socket){
                 console.log(splitData[1]+" was promoted by "+senderName+"!");});
             }
 
-        } else if (data.startsWith("?demote ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
+        }
+        // demote command
+        else if (command.getCommandID(cmd) == 5 && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Demote
           splitData = data.split(" ");
           if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
@@ -222,7 +233,9 @@ io.on('connection', function(socket){
                 console.log(splitData[1]+" was demoted by "+senderName+"!");});
             }
 
-        } else if (data.startsWith("?ban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
+        }
+        // ban command
+        else if (command.getCommandID(cmd) == 1 && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Ban
           splitData = data.split(" ");
           if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
@@ -245,7 +258,9 @@ io.on('connection', function(socket){
               console.log(splitData[1]+" was banned by "+senderName+"!!!");
             });
           }
-        }else if (data.startsWith("?kick ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
+        }
+        // kick command
+        else if (command.getCommandID(cmd) == 3 && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Kick
           splitData = data.split(" ");
           if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
@@ -261,7 +276,9 @@ io.on('connection', function(socket){
               }
               io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from("> User kicked!").toString('base64')]);
             }
-        } else if (data.startsWith("?unban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
+        }
+        // unban command
+        else if (command.getCommandID(cmd) == 2 && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Un-ban
           splitData = data.split(" ");
           if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
@@ -279,7 +296,9 @@ io.on('connection', function(socket){
               }
             });
           }
-        } else if (data.startsWith("?pm ")) {
+        }
+        // pm command
+        else if (command.getCommandID(cmd) == 103) {
           send = false;
           splitData = data.split(" ");
           if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
@@ -307,7 +326,9 @@ io.on('connection', function(socket){
             io.to(socket.id).emit('message', [datetimestring, Buffer.from(packet2).toString("base64")]);
           }
           
-        } else if (data.startsWith("?color ") && authList[senderName] !== undefined) {
+        }
+        // color command
+        else if (command.getCommandID(cmd) == 102 && authList[senderName] !== undefined) {
           // Set the name color of the person running the command
           splitData = data.split(" "); 
           if (authList[senderName] == undefined) {
@@ -324,15 +345,17 @@ io.on('connection', function(socket){
             });
           }
           
-        } else if (data.startsWith("?llamafy ") && authList[senderName] !== undefined) {
+        }
+        // llamafy command
+        else if (command.getCommandID(cmd) == 101 && authList[senderName] !== undefined) {
           // Llamafy
           send = false;
           splitData = data.split(" ");
           var packet = "<span style='background:cyan;'>> "+splitData[1]+" has been turned into a llama by "+senderName+"!</span>";
           io.emit("message", [datetimestring, Buffer.from(packet).toString('base64')]);
-// EMBEDDING OF IMAGES AND YOUTUBE VIDS
-
-        } else if (data.startsWith("?img ")) {
+        }
+        // img command
+        else if (command.getCommandID(cmd) == 104) {
           splitData = data.split(" ");
           var imgpacket = "<img src='"+splitData[1]+"' /><a></a>";
           io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from(imgpacket).toString('base64')]);
