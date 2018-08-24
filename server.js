@@ -316,6 +316,7 @@ io.on('connection', function(socket){
           splitData = data.split(" ");
           var imgpacket = "<img src='"+splitData[1]+"' /><a></a>";
           io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from(imgpacket).toString('base64')]);
+          saveMessage([datetimestring, Buffer.from(imgpacket).toString('base64')]);
         }
       }
       if (send) {
