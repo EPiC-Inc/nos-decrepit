@@ -9,7 +9,7 @@ var sanitize = require('sanitize-html');
 var stdin = process.openStdin();
 
 // Variables
-var cmdHelp = "?llamafy @[username] : Turns the user into a llama! (it's a joke)<br>?color [color / hex code] : Sets your name color";
+var cmdHelp = "?llamafy @[username] : Turns the user into a llama! (it's a joke)<br>?color [color / hex code] : Sets your name color<br>?img [link to image] : Inserts an image";
 var adminHelp = cmdHelp + "<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg to everyone on<br>?ban [user] : Bans a user from the chat<br>?unban [user] : Unbans a banned user<br>?kick [user] : Temporarily disconnects a user";
 var users = {};
 var authList = require('./users.json');
@@ -310,6 +310,10 @@ io.on('connection', function(socket){
           splitData = data.split(" ");
           var packet = "<span style='background:cyan;'>> "+splitData[1]+" has been turned into a llama by "+senderName+"!</span>";
           io.emit("message", [datetimestring, Buffer.from(packet).toString('base64')]);
+// EMBEDDING OF IMAGES AND YOUTUBE VIDS
+        } else if (data.startsWith("?img ")) {
+          var imgpacket = "<img src='"+splitData[1]+"' />";
+          io.to(users[socket.id].room).emit([datetimestring, Buffer.from(imgpacket).toString('base64')]);
         }
       }
       if (send) {
