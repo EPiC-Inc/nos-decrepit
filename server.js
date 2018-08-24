@@ -73,7 +73,7 @@ io.on('connection', function(socket){
           rep.push(users[id].name);
         }
       }
-      io.to(socket.id).emit('users online', rep);
+      io.to(users[socket.id].room).emit('users online', rep);
     }
       delete users[socket.id];
     }
@@ -109,7 +109,7 @@ io.on('connection', function(socket){
           rep.push(users[id].name);
         }
       }
-      io.to(socket.id).emit('users online', rep);
+      io.to(users[socket.id].room).emit('users online', rep);
     }
     }});
 
