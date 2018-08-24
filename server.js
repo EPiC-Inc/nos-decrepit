@@ -63,8 +63,8 @@ io.on('connection', function(socket){
         header = "> Admin [<img src='/static/admin.png'>"}
       msg = Buffer.from(header+"<span style='"+authList[users[socket.id].name]['nameStyle']+"'>"+users[socket.id].name+"</span>] has left").toString('base64');
       datetimestring = toLocalTime().toLocaleString()
-      io.to(users[socket.id].room).emit('message', [datetimestring, msg]);
-      saveMessage([datetimestring, msg]);
+      //io.to(users[socket.id].room).emit('message', [datetimestring, msg]);
+      //saveMessage([datetimestring, msg]);
       delete users[socket.id];
     }
   });
@@ -83,13 +83,13 @@ io.on('connection', function(socket){
     }
     msg = Buffer.from(header+"<span style='"+authList[data[0]]['nameStyle']+"'>"+data[0]+"</span>] has joined!").toString('base64');
     datetimestring = toLocalTime().toLocaleString()
-    setTimeout(function(){io.to(data[1]).emit('message', [datetimestring, msg]);}, 1000);
+    //setTimeout(function(){io.to(data[1]).emit('message', [datetimestring, msg]);}, 1000);
     if (data[1] == 'lobby') {
       //io.to(socket.id).emit('message', msgs);
       for (i in msgs) {
         io.to(socket.id).emit('message', msgs[i]);
       }
-      saveMessage([datetimestring, msg]);
+      //saveMessage([datetimestring, msg]);
     }
     }});
 
@@ -157,7 +157,7 @@ io.on('connection', function(socket){
               delete authList[splitData[1]];
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', [datetimestring, Buffer.from("> User successfully removed!").toString('base64')]);}
+                if (err) {return console.log(err);} else {io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from("> User successfully removed!").toString('base64')]);}
                 console.log(splitData[1]+" was removed by "+senderName+"!");});
             }
           }
@@ -184,7 +184,7 @@ io.on('connection', function(socket){
               authList[splitData[1]]['admin'] = true;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', [datetimestring, Buffer.from("> User successfully promoted!").toString('base64')]);}
+                if (err) {return console.log(err);} else {io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from("> User successfully promoted!").toString('base64')]);}
                 console.log(splitData[1]+" was promoted by "+senderName+"!");});
             }
 
@@ -198,7 +198,7 @@ io.on('connection', function(socket){
               authList[splitData[1]]['admin'] = false;
               content = JSON.stringify(authList);
               fs.writeFile("users.json", content, 'utf8', function (err) {
-                if (err) {return console.log(err);} else {io.emit('message', [datetimestring, Buffer.from("> User successfully demoted!").toString('base64')]);}
+                if (err) {return console.log(err);} else {io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from("> User successfully demoted!").toString('base64')]);}
                 console.log(splitData[1]+" was demoted by "+senderName+"!");});
             }
 
@@ -220,7 +220,7 @@ io.on('connection', function(socket){
               if (err) {
                 return console.log(err);
               } else {
-                io.emit('message', [datetimestring, Buffer.from("> User successfully banned!").toString('base64')]);
+                io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from("> User successfully banned!").toString('base64')]);
               }
               console.log(splitData[1]+" was banned by "+senderName+"!!!");
             });
@@ -239,7 +239,7 @@ io.on('connection', function(socket){
                   delete users[i];
                 }
               }
-              io.emit('message', [datetimestring, Buffer.from("> User kicked!").toString('base64')]);
+              io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from("> User kicked!").toString('base64')]);
             }
         } else if (data.startsWith("?unban ") && authList[senderName] !== undefined && authList[senderName]['admin']) {
           // Un-ban
@@ -254,7 +254,7 @@ io.on('connection', function(socket){
               if (err) {
                 return console.log(err);
               } else {
-                io.emit('message', [datetimestring, Buffer.from("> User successfully unbanned!").toString('base64')]);
+                io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from("> User successfully unbanned!").toString('base64')]);
                 console.log(splitData[1]+" was unbanned by "+senderName+"!");
               }
             });
