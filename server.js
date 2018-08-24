@@ -265,8 +265,8 @@ io.on('connection', function(socket){
           // Un-ban
           splitData = data.split(" ");
           if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
-          if (authList[splitData[1]] == undefined || authList[splitData[1]] == "_System") {
-            io.to(socket.id).emit('message', [datetimetring, Buffer.from("> User not found!").toString('base64')]);
+          if (authList[splitData[1]] == undefined || splitData[1] == "_System") {
+            io.to(socket.id).emit('message', [datetimestring, Buffer.from("> User not found!").toString('base64')]);
           } else {
             authList[splitData[1]]['active'] = true;
             content = JSON.stringify(authList);
