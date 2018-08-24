@@ -314,7 +314,7 @@ io.on('connection', function(socket){
         } else if (data.startsWith("?img ")) {
           splitData = data.split(" ");
           var imgpacket = "<img src='"+splitData[1]+"' />";
-          io.to(users[socket.id].room).emit([datetimestring, Buffer.from(imgpacket).toString('base64')]);
+          io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from(imgpacket).toString('base64')]);
         }
       }
       if (send) {
