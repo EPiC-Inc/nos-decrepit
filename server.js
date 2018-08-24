@@ -65,6 +65,16 @@ io.on('connection', function(socket){
       datetimestring = toLocalTime().toLocaleString()
       //io.to(users[socket.id].room).emit('message', [datetimestring, msg]);
       //saveMessage([datetimestring, msg]);
+      if (users[socket.id] !== undefined) {
+      var rep = [];
+      var cRoom = users[socket.id].room;
+      for (id in users) {
+        if (users[id].room == cRoom) {
+          rep.push(users[id].name);
+        }
+      }
+      io.to(socket.id).emit('users online', rep);
+    }
       delete users[socket.id];
     }
   });
@@ -90,6 +100,16 @@ io.on('connection', function(socket){
         io.to(socket.id).emit('message', msgs[i]);
       }
       //saveMessage([datetimestring, msg]);
+    }
+      if (users[socket.id] !== undefined) {
+      var rep = [];
+      var cRoom = users[socket.id].room;
+      for (id in users) {
+        if (users[id].room == cRoom) {
+          rep.push(users[id].name);
+        }
+      }
+      io.to(socket.id).emit('users online', rep);
     }
     }});
 
