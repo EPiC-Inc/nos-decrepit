@@ -1,12 +1,7 @@
 {
 	"label": "?",
+	"num_commands": 12,
 	"commands": {
-		"dummy": {
-			"id": -1,
-			"help": "dummy",
-			"desc": "This is a dummy command.",
-			"perms": 0
-		},
 		"rmuser": {
 			"id": 0,
 			"help": "rmuser [user]",

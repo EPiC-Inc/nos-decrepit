@@ -198,8 +198,32 @@ io.on('connection', function(socket){
         }
         // help command
         else if (command.getCommandID(cmd) == 100) {
-          if(authList[senderName]['admin']) {io.to(socket.id).emit('message', [datetimestring, Buffer.from(adminHelp).toString('base64')]);}
-          else {io.to(socket.id).emit('message', [datetimestring, Buffer.from(cmdHelp).toString('base64')]);}
+          if(authList[senderName]['admin']) {
+          	var helpmsg = "";
+          	var c;
+          	for(var c_name in command.getCommandList()) {
+          		c = command.getRawCommand(c_name);
+          		if(c.alias === undefined) {
+          			helpmsg = helpmsg + command.getCommandLabel() + command.getCommandHelp(c);
+          			helpmsg = helpmsg + " : " + command.getCommandDescription(c);
+          			helpmsg = helpmsg + "<br />"
+           		}
+          	}
+          	io.to(socket.id).emit('message', [datetimestring, Buffer.from(helpmsg).toString('base64')]);
+          }
+          else {
+          	var helpmsg = "";
+          	var c;
+          	for(var c_name in command.getCommandList()) {
+          		c = command.getRawCommand(c_name);
+          		if(c.alias === undefined && c.scope != -1) {
+          			helpmsg = helpmsg + command.getCommandLabel() + command.getCommandHelp(c);
+          			helpmsg = helpmsg + " : " + command.getCommandDescription(c);
+          			helpmsg = helpmsg + "<br />"
+           		}
+          	}
+          	io.to(socket.id).emit('message', [datetimestring, Buffer.from(helpmsg).toString('base64')]);
+          }
 
         }
         // promote command
