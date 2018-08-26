@@ -193,7 +193,7 @@ socket.on('a-ok', function(){
 socket.on('users online', function(data){
   users.innerHTML = '';
   for (i in data) {
-    users.innerHTML += '<br><div class="user"><button style="background:lightcyan;border:none;font-size:15px;" onclick="m.value+=\'@'+data[i]+'\';menu()">'+data[i]+'</button><span class="tooltiptext"><button style="background:black;border:none;font-size:15px;color:white;" onclick="m.value+=\'?pm @'+data[i]+' \';menu()">Message</button></span></div>';
+    users.innerHTML += '<br><div class="user"><button class="userbtn" onclick="m.value+=\'@'+data[i]+'\';menu()">'+data[i]+'</button><span class="tooltiptext"><button style="background:black;border:none;font-size:15px;color:white;" onclick="m.value+=\'?pm @'+data[i]+' \';menu()">Message</button></span></div>';
   }
 });
 
@@ -202,7 +202,7 @@ socket.on("message", function(supadata){
     console.log(supadata);
     data = decodeURIComponent(escape(atob(String(supadata[1]))));
     // Add message
-    var start='<div>'
+    var start='<div class="msg">'
     if (!alertWaiting) {
       if (!vis()) {changeIco('/static/msg.png');}
     }
