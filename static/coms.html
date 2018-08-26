@@ -5,6 +5,8 @@
   <link rel="shortcut icon" type="image/png" href="/static/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="/static/style.css">
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/static/themes.js"></script>
+  <script src="/static/themechooser.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -22,7 +24,16 @@
     <form onsubmit='return false'>
       <input style="width:100px;" id='roomSelect' />
       <button style='font-size:15px;' onclick="changeRoom()">Change room</button>
-    </form><br>
+    </form>
+    <div class="dropdown">
+        <button onclick="themeDropdown()" class="dropbtn">Themes</button>
+        <div id="themeDrop" class="dropdown-content">
+            <a href="#" onclick="defaultTheme()">Default Theme</a>
+            <a href="#" onclick="darkTheme()">Dark Theme</a>
+        </div>
+    </div>
+    <br>
+    <br>
     <input id="scroll" type="checkbox" checked='true' style='height:25px;width:25px;'> Autoscroll<br><br>
     <input id="xss_prot" type="checkbox" checked='true' style='height:25px;width:25px;' /> XSS protection<br /><br />
     <b><br>Online:</b>
