@@ -92,7 +92,7 @@ function sendMsg() {
   }
 }
 
-/* 
+/*
 XSS Protection by Estrel Steel
 All addition variables and functions begin with 'xss_prot_'
 */
@@ -167,6 +167,12 @@ if (getCookie('user') !== "" && getCookie('user') !== undefined) {
   var username = getCookie("user");
 }
 
+if (getCookie('theme') !== "" && getCookie('theme') !== undefined) {
+  if (getCookie('theme') == 'dark') {
+    darkTheme();
+  }
+}
+
 // Callbacks
 vis(function(){
     if (vis()) {changeIco('/static/favicon.png');
@@ -217,10 +223,10 @@ socket.on("message", function(supadata){
     	dataSplit[1] = cUrl(dataSplit[1]);
   	}
     data = dataSplit.join(' ');
-    
+
     // Line which protects from xss if requested in menu.
     if(xss_prot_check.checked) data = xss_prot_handle(data);
-    
+
     $("#messages").append(supadata[0]+" "+start+data+"</div>");
     if (scroll.checked) {
       window.scrollTo(0,document.body.scrollHeight);
