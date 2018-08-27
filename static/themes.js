@@ -60,6 +60,23 @@ function darkTheme() {
     changecss('span', 'color', 'white');
     changecss('input', 'background-color', 'rgb(128, 128, 128)');
 }
+function painTheme() {
+    document.cookie='theme=pain';
+    changecss('body','background-color','rgb(56, 16, 16)'); //
+    changecss('header','background-color', 'rgb(136, 133, 0)'); //
+    changecss('#menu', 'background-color', 'rgb(39, 97, 64)'); //
+    changecss('#menu', 'color', 'rgb(255, 153, 0)'); //
+    changecss('.userbtn', 'background-color', 'rgb(204, 0, 204)'); //
+    changecss('button', 'background-color', 'rgb(142, 62, 92)'); //
+    changecss('button', 'border', '2px solid rgb(210, 255, 228)'); //
+    changecss('h1','color','rgb(64, 65, 41)'); //
+    changecss('#messages','color','rgb(153, 102, 51)'); //
+    changecss('.msg', 'color', 'rgb(191, 191, 191)'); //
+    changecss('.msgSender', 'background-color', 'rgb(13, 191, 66)'); //
+    changecss('.dropbtn', 'background-color', 'rgb(105, 255, 204)'); //
+    changecss('span', 'color', 'white'); //
+    changecss('input', 'background-color', 'rgb(153, 153, 102)'); //
+}
 function defaultTheme() {
   document.cookie='theme=default';
      window.location.reload();
