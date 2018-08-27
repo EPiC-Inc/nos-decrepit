@@ -1,6 +1,7 @@
 # nos / NOrSe (Formerly NOS-ALPHA)
 
 This is a web-based chat client that will be slowly evolving.
+(Congrats to whoever can read my poorly documented code)
 
 
 # Requirements
