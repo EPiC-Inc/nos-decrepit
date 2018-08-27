@@ -170,6 +170,8 @@ if (getCookie('user') !== "" && getCookie('user') !== undefined) {
 if (getCookie('theme') !== "" && getCookie('theme') !== undefined) {
   if (getCookie('theme') == 'dark') {
     darkTheme();
+  } else if (getCookie('theme') == 'pain') {
+    painTheme();
   }
 }
 
