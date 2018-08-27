@@ -1,6 +1,6 @@
 # nos / NOrSe (Formerly NOS-ALPHA)
 
-This is a web-based chat client that will be slowly evolving.
+This is a web-based chat client that will be slowly evolving. There is a demo at http://nos-cli.tk
 
 (Congrats to whoever can read my poorly documented code)
 
