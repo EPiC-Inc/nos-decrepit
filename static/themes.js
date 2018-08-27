@@ -79,5 +79,18 @@ function painTheme() {
 }
 function defaultTheme() {
   document.cookie='theme=default';
-     window.location.reload();
+  changecss('body','background-color','white');
+  changecss('header','background-color', '#33ccff');
+  changecss('#menu', 'background-color', 'lightcyan');
+  changecss('#menu', 'color', 'black');
+  changecss('.userbtn', 'background-color', 'lightcyan');
+  changecss('button', 'background-color', 'cyan');
+  changecss('button', 'border', '2px solid darkcyan');
+  changecss('h1','color','black');
+  changecss('#messages','color','black');
+  changecss('.msg', 'color', 'black');
+  changecss('.msgSender', 'background-color', 'white');
+  changecss('.dropbtn', 'background-color', '#3498DB');
+  changecss('span', 'color', 'black');
+  changecss('input', 'background-color', 'white');
 }

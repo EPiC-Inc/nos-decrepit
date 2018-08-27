@@ -7,6 +7,211 @@
   box-sizing: border-box
 }
 
+a {
+  transition-duration: 0.4s;
+  color: #00ccff;
+}
+
+div p {
+  display: inline;
+}
+
+a:hover {
+  color: darkcyan;
+  background: cyan;
+}
+
+.alert {
+  background: red;
+}
+
+.announcement {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+}
+
+.announcement.success {background-color: #4CAF50;}
+.announcement.info {background-color: #2196F3;}
+.announcement.warning {background-color: #ff9800;}
+
+body {
+  background: white;
+  font: 15px Roboto Mono, monospace;
+}
+
+button {
+  background-color: cyan;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  border: 2px solid darkcyan;
+  transition-duration: .3s;
+  font-family: Roboto Mono, monospace;
+}
+
+button:hover {
+  background: darkcyan;
+  color: cyan;
+}
+
+.center {
+  width: 100%;
+  text-align: center;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+/* theme chooser dropdown */
+.dropbtn {
+   background-color: #3498DB;
+   color: white;
+   padding: 16px;
+   font-size: 16px;
+   border: none;
+   cursor: pointer;
+}
+.dropbtn:hover, .dropbtn:focus {
+   background-color: #2980B9
+}
+
+.dropdown {
+   position: relative;
+   display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+   display: none;
+   position: absolute;
+   background-color: #f1f1f1;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+   color: black;
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+h1, h2, h3, h4, h5, h6 {
+  padding-left: 10px;
+}
+h1 {
+  color: black;
+  padding: 5px;
+}
+
+header {
+  background: #33ccff;
+  position: fixed;
+  width: 100%;
+}
+
+header div {
+  float: left;
+  clear: none;
+  text-align: center;
+}
+
+header div button {
+  height: 50px;
+}
+
+header .right {
+  float: right;
+}
+
+input {
+  border: 2px solid black;
+  font-size: 18px;
+  font: 15px Roboto Mono, monospace;
+  background-color: white;
+}
+
+.infobox {
+  border-radius: 10px;
+  height: 30px;
+  width: 200px;
+}
+
+li {
+  font-size: 20px;
+  padding-left: 20px;
+  font: 15px Roboto Mono, monospace;
+}
+
+#menu {
+  background: lightcyan;
+  color: black;
+  max-width: 400px;
+  position: fixed;
+}
+
+#messages {
+  font-size: 20px;
+  width: 100%;
+  color: black;
+}
+
+.msgSender {
+  background: white;
+  padding: 3px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.msgSender input {
+  padding: 10px;
+  width: 90%;
+  margin-right: .5%;
+}
+
+.msgSender button {
+  width: 9%;
+  border: none;
+  padding: 10px;
+}
+
+.msg { /* make message different color than time sent */
+  color: black;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+span {
+  color: black;
+}
+
+table {
+  width: 100%;
+}
+
 .user {
     position: relative;
     display: inline-block;
@@ -30,213 +235,8 @@
     visibility: visible;
 }
 
-a {
-  transition-duration: 0.4s;
-  color: #00ccff;
-}
-
-div p {
-  display: inline;
-}
-
-a:hover {
-  color: darkcyan;
-  background: cyan;
-}
-
-.announcement {
-  padding: 20px;
-  background-color: #f44336;
-  color: white;
-  opacity: 1;
-  transition: opacity 0.6s;
-  margin-bottom: 15px;
-}
-
-.announcement.success {background-color: #4CAF50;}
-.announcement.info {background-color: #2196F3;}
-.announcement.warning {background-color: #ff9800;}
-
-.closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.closebtn:hover {
-    color: black;
-}
-
-body {
-  background: white;
-  font: 15px Roboto Mono, monospace;
-}
-
-table {
-  width: 100%;
-}
-
-button {
-  background-color: cyan;
-  padding: 10px;
-  font-weight: bold;
-  font-size: 20px;
-  border: 2px solid darkcyan;
-  transition-duration: .3s;
-  font-family: Roboto Mono, monospace;
-}
-
-button:hover {
-  background: darkcyan;
-  color: cyan;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  padding-left: 10px;
-}
-h1 {
-  color: black;
-}
-
-li {
-  font-size: 20px;
-  padding-left: 20px;
-  font: 15px Roboto Mono, monospace;
-}
-
-.center {
-  width: 100%;
-  text-align: center;
-}
-
-input {
-  border: 2px solid black;
-  font-size: 18px;
-  font: 15px Roboto Mono, monospace;
-  background-color: white;
-}
-
-.infobox {
-  border-radius: 10px;
-  height: 30px;
-  width: 200px;
-}
-
-h1 {
-  padding: 5px;
-}
-
-header {
-  background: #33ccff;
-  position: fixed;
-  width: 100%;
-}
-
-header div {
-  float: left;
-  clear: none;
-  text-align: center;
-}
-
-header div button {
-  height: 50px;
-}
-
-header .right {
-  float: right;
-}
-span {
-  color: black;
-}
-
-.alert {
-  background: red;
-}
-
-.msgSender {
-  background: white;
-  padding: 3px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-.msgSender input {
-  padding: 10px;
-  width: 90%;
-  margin-right: .5%;
-}
-
-.msgSender button {
-  width: 9%;
-  border: none;
-  padding: 10px;
-}
-
-#menu {
-  background: lightcyan;
-  color: black;
-  max-width: 400px;
-  position: fixed;
-}
-
-#messages {
-  font-size: 20px;
-  width: 100%;
-  color: black;
-}
-.msg { /* make message different color than time sent */
-  color: black;
-}
 .userbtn {
   background-color:lightcyan;
   border:none;
   font-size:15px;
 }
-
- /* theme chooser dropdown */
-.dropbtn {
-    background-color: #3498DB;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #2980B9
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
