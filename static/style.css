@@ -23,6 +23,7 @@ a:hover {
 
 .alert {
   background: red;
+  font-size: 20px;
 }
 
 .announcement {
