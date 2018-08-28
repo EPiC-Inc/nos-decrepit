@@ -15,7 +15,7 @@ var adminHelp = cmdHelp + "<br>?rmuser [user] : Removes a user<br>?broadcast [ms
 var users = {};
 var authList = require('./users.json');
 var registered_rooms = require('./registered_rooms.json');
-//console.log(authList);
+console.log(registered_rooms);
 
 // This is so that the last 20 messages sent to 'lobby' will be recorded.
 // (mostly for liability issues)
@@ -393,6 +393,8 @@ io.on('connection', function(socket){
           if (registered_rooms[userRoom]) {
             // notify user of registration
             io.to(socket.id).emit('message', [datetimestring, Buffer.from('> Sorry, room is already registered by '+registered_rooms[userRoom]['owner']).toString('base64')]);
+          } else {
+            io.to(socket.id).emit('message', [datetimestring, Buffer.from('> test').toString('base64')]);
           }
         }
       }
