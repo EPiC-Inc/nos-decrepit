@@ -387,7 +387,7 @@ io.on('connection', function(socket){
           saveMessage([datetimestring, Buffer.from(imgpacket).toString('base64')]);
         }
         // register command
-        else if (command.getCommandID(cmd) == 104) {
+        else if (command.getCommandID(cmd) == 200) {
           // register room, but not if already taken
           userRoom = users[socket.id].room
           if (registered_rooms[userRoom]) {
