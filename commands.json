@@ -79,6 +79,12 @@
 		},
 		"image": {
 			"alias": "img"
+		},
+		"register": {
+			"id": 200,
+			"help": "register",
+			"desc": "Registers an unregistered room as your own, saving the last 20 messages and adding it to a global registry.",
+			"scope": 0
 		}
 	}
 }
