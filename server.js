@@ -394,6 +394,7 @@ io.on('connection', function(socket){
             // notify user of registration
             io.to(socket.id).emit('message', [datetimestring, Buffer.from('> Sorry, room is already registered by '+registered_rooms[userRoom]['owner']).toString('base64')]);
           }
+        }
       }
       if (send) {
         var header = '';
@@ -418,7 +419,7 @@ io.on('connection', function(socket){
         }
       }
     }
-  }
+  });
 
   
   
