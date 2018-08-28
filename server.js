@@ -14,6 +14,7 @@ var cmdHelp = "?llamafy @[username] : Turns the user into a llama! (it's a joke)
 var adminHelp = cmdHelp + "<br>?rmuser [user] : Removes a user<br>?broadcast [msg] : Sends msg to everyone on<br>?ban [user] : Bans a user from the chat<br>?unban [user] : Unbans a banned user<br>?kick [user] : Temporarily disconnects a user";
 var users = {};
 var authList = require('./users.json');
+var registered_rooms = require('./registered_rooms.json');
 //console.log(authList);
 
 // This is so that the last 20 messages sent to 'lobby' will be recorded.
@@ -364,7 +365,7 @@ io.on('connection', function(socket){
               if (err) {
                 return console.log(err);
               } else {
-                io.emit('message', [datetimestring, Buffer.from("> Color changed!").toString('base64')]);
+                io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from("> Color changed!").toString('base64')]);
               }
             });
           }
@@ -385,6 +386,14 @@ io.on('connection', function(socket){
           io.to(users[socket.id].room).emit('message', [datetimestring, Buffer.from(imgpacket).toString('base64')]);
           saveMessage([datetimestring, Buffer.from(imgpacket).toString('base64')]);
         }
+        // register command
+        else if (command.getCommandID(cmd) == 104) {
+          // register room, but not if already taken
+          userRoom = users[socket.id].room
+          if (registered_rooms[userRoom]) {
+            // notify user of registration
+            io.to(socket.id).emit('message', [datetimestring, Buffer.from('> Sorry, room is already registered by '+registered_rooms[userRoom]['owner']).toString('base64')]);
+          }
       }
       if (send) {
         var header = '';
