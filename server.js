@@ -394,7 +394,14 @@ io.on('connection', function(socket){
             // notify user of registration
             io.to(socket.id).emit('message', [datetimestring, Buffer.from('> Sorry, room is already registered by '+registered_rooms[userRoom]['owner']).toString('base64')]);
           } else {
-            io.to(socket.id).emit('message', [datetimestring, Buffer.from('> test').toString('base64')]);
+            registered_rooms[userRoom] = {
+              "owner": users[socket.id].name
+            }
+            content = JSON.stringify(registered_rooms);
+            fs.writeFile("registered_rooms.json", content, 'utf8', function (err) {
+              if (err) {return console.log(err);} else {
+              console.log(data[0]+" has signed up!");}});
+            io.to(socket.id).emit('message', [datetimestring, Buffer.from('> Room registered').toString('base64')]);
           }
         }
       }
