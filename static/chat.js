@@ -167,11 +167,15 @@ if (getCookie('user') !== "" && getCookie('user') !== undefined) {
   var username = getCookie("user");
 }
 
+
+// THEEMS
 if (getCookie('theme') !== "" && getCookie('theme') !== undefined) {
   if (getCookie('theme') == 'dark') {
     darkTheme();
   } else if (getCookie('theme') == 'pain') {
     painTheme();
+  } else if (getCookie('theme') == 'minimalDark') {
+    minimalDarkTheme();
   }
 }
 
