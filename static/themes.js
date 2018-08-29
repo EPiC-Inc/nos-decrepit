@@ -60,8 +60,8 @@ function darkTheme() {
     changecss('span', 'color', 'white');
     changecss('input', 'background-color', 'rgb(128, 128, 128)');
 }
-function defaultTheme() {
-  document.cookie='theme=Minimal Dark';
+function minimalDarkTheme() {
+  document.cookie='theme=minimalDark';
   changecss('body','background-color','black');
   changecss('header','background-color', 'black');
   changecss('#menu', 'background-color', 'black');
