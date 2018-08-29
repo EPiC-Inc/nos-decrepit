@@ -43,8 +43,21 @@ function changecss(theClass, element, value) {
 
 // theme setters are here as to not include junk in coms.html
 
+function resetcss() { // testing some js code from stackexchange to reload css and fix theme compatibility issues
+        var links = document.getElementsByTagName("link");
+
+    for (var x in links) {
+        var link = links[x];
+
+        if (link.getAttribute("type").indexOf("css") > -1) {
+            link.href = link.href + "?id=" + new Date().getMilliseconds();
+        }
+    }
+}
+
 function darkTheme() {
     document.cookie='theme=dark';
+    resetcss();
     changecss('body','background-color','rgb(13, 13, 13)');
     changecss('header','background-color', 'rgb(77, 77, 77)');
     changecss('#menu', 'background-color', 'rgb(77, 77, 77)');
@@ -61,6 +74,7 @@ function darkTheme() {
     changecss('input', 'background-color', 'rgb(128, 128, 128)');
 }
 function minimalDarkTheme() {
+  resetcss();
   document.cookie='theme=minimalDark';
   changecss('body','background-color','black');
   changecss('header','background-color', 'black');
@@ -87,6 +101,7 @@ function minimalDarkTheme() {
 }
 function painTheme() {
     document.cookie='theme=pain';
+    resetcss();
     changecss('body','background-color','rgb(56, 16, 16)'); //
     changecss('header','background-color', 'rgb(136, 133, 0)'); //
     changecss('#menu', 'background-color', 'rgb(39, 97, 64)'); //
@@ -104,6 +119,7 @@ function painTheme() {
 }
 function defaultTheme() {
   document.cookie='theme=default';
+  resetcss();
   changecss('body','background-color','white');
   changecss('header','background-color', '#33ccff');
   changecss('#menu', 'background-color', 'lightcyan');
