@@ -60,6 +60,31 @@ function darkTheme() {
     changecss('span', 'color', 'white');
     changecss('input', 'background-color', 'rgb(128, 128, 128)');
 }
+function defaultTheme() {
+  document.cookie='theme=Minimal Dark';
+  changecss('body','background-color','black');
+  changecss('header','background-color', 'black');
+  changecss('#menu', 'background-color', 'black');
+  changecss('#menu', 'color', 'white');
+  changecss('.userbtn', 'background-color', 'black');
+  changecss('.userbtn','color','white');
+  changecss('button', 'background-color', 'black');
+  changecss('button', 'border', '2px solid white');
+  changecss('button','color','white');
+  changecss('h1','color','white');
+  changecss('#messages','color','white');
+  changecss('.msg', 'color', 'white');
+  changecss('.msgSender', 'background-color', 'black');
+  changecss('.dropbtn', 'background-color', 'black');
+  changecss('span', 'color', 'black');
+  changecss('input', 'background-color', 'black');
+  changecss('.msgSender', 'color', 'rgb(0, 0, 0)');
+  changecss('.userbtn', 'border', '2px solid white');
+  changecss('.msgSender button','border','2px solid white');
+  changecss('.msgSender input','color','white');
+  changecss('.msgSender input','border','2px solid white');
+  changecss('input','border','2px solid white');
+}
 function painTheme() {
     document.cookie='theme=pain';
     changecss('body','background-color','rgb(56, 16, 16)'); //
