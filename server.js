@@ -400,7 +400,7 @@ io.on('connection', function(socket){
             content = JSON.stringify(registered_rooms);
             fs.writeFile("registered_rooms.json", content, 'utf8', function (err) {
               if (err) {return console.log(err);} else {
-              console.log(data[0]+" has signed up!");}});
+              console.log(users[socket.id].name+" has registered the room "+userRoom);}});
             io.to(socket.id).emit('message', [datetimestring, Buffer.from('> Room registered').toString('base64')]);
           }
         }
