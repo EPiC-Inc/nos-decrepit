@@ -389,7 +389,9 @@ io.on('connection', function(socket){
         // register command
         else if (command.getCommandID(cmd) == 200) {
           // register room, but not if already taken
-          userRoom = users[socket.id].room
+          splitData = data.split(" ");
+          splitData.splice(0, 1);
+          userRoom = splitData.join(' ');
           if (registered_rooms[userRoom]) {
             // notify user of registration
             io.to(socket.id).emit('message', [datetimestring, Buffer.from('> Sorry, room is already registered by '+registered_rooms[userRoom]['owner']).toString('base64')]);
