@@ -17,7 +17,14 @@ This is a web-based chat client that will be slowly evolving. There is a demo at
 
 # Starting server
 
-Make sure to create a users.json file in the same directory as server.js. This is where all new accounts will be located (passwords will be encrypted).
+To start the server, you can use
+
+`bash ./start_nos.sh [port]` or `./start_nos.bat [port]` <br>
+[port] is optional and will default to 80
+
+`bash ./start_nos.sh test` or `./start_nos.bat test` to quickly start on port 8080
+
+or you could use the old method:
 
 `node server.js [port]`<br>
 [port] is optional, defaults to 80
@@ -25,6 +32,8 @@ Make sure to create a users.json file in the same directory as server.js. This i
 `npm test` to quickly start on port 8080
 
 `npm start` starts it on port 80
+
+this method may require the creation of some files if they do not exist.
 
 # Updating
 `git pull origin master`

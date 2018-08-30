@@ -86,11 +86,23 @@
 			"desc": "Registers an unregistered room as your own, saving the last 20 messages and adding it to a global registry.",
 			"scope": 0
 		},
+		"reg": {
+			"alias": "register"
+		},
 		"unregister": {
 			"id": 201,
 			"help": "unregister [roomName]",
 			"desc": "Unregisters a room that you currently own.",
 			"scope": 0
+		},
+		"deregister": {
+			"alias": "unregister"
+		},
+		"unreg": {
+			"alias": "unregister"
+		},
+		"dereg": {
+			"alias": "unregister"
 		}
 	}
 }
