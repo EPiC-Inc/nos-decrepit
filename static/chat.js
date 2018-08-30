@@ -204,8 +204,20 @@ socket.on('a-ok', function(){
 
 socket.on('users online', function(data){
   users.innerHTML = '';
+  var printed = [];
+  var found;
   for (i in data) {
-    users.innerHTML += '<br><div class="user"><button class="userbtn" onclick="m.value+=\'@'+data[i]+'\';menu()">'+data[i]+'</button><span class="tooltiptext"><button style="background:black;border:none;font-size:15px;color:white;" onclick="m.value+=\'?pm @'+data[i]+' \';menu()">Message</button></span></div>';
+  	found = false;
+  	for(var j = 0; j < printed.length; j++) {
+  		if(printed[j] === data[i]) {
+  			found = true;
+  			break;
+  		}
+  	}
+  	if(!found) {
+    	users.innerHTML += '<br><div class="user"><button class="userbtn" onclick="m.value+=\'@'+data[i]+'\';menu()">'+data[i]+'</button><span class="tooltiptext"><button style="background:black;border:none;font-size:15px;color:white;" onclick="m.value+=\'?pm @'+data[i]+' \';menu()">Message</button></span></div>';
+  		printed.push(data[i]);
+  	}
   }
 });
 
