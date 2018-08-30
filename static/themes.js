@@ -45,6 +45,35 @@ function changecss(theClass, element, value) {
 
 
 //Making a new theme? Ask Fred18295 for some info first so you don't break anything
+function minimalLightTheme(){
+  document.cookie='theme=minimalLight';
+  defaultTheme();
+  changecss('body','background-color','white');
+  changecss('header','background-color', 'white');
+  changecss('#menu', 'background-color', 'white');
+  changecss('#menu', 'color', 'black');
+  changecss('.userbtn', 'background-color', 'white');
+  changecss('.userbtn','color','black'); //NID
+  changecss('button', 'background-color', 'white');
+  changecss('button', 'border', '2px solid black');
+  changecss('button','color','black'); //NID
+  changecss('h1','color','black');
+  changecss('#messages','color','black');
+  changecss('.msg', 'color', 'black');
+  changecss('.msgSender', 'background-color', 'white');
+  changecss('.dropbtn', 'background-color', 'white');
+  changecss('.dropbtn', 'border', '2px solid black'); //NID
+  changecss('.dropbtn', 'color', 'black'); //NID
+  changecss('span', 'color', 'white');
+  changecss('input', 'background-color', 'white');
+  changecss('.msgSender', 'color', 'black'); //NID
+  changecss('.userbtn', 'border', '2px solid black'); //NID
+  changecss('.msgSender button','border','2px solid black'); //NID
+  changecss('.msgSender input','color','black'); //NID
+  changecss('.msgSender input','border','2px solid black'); //NID
+  changecss('input','border','2px solid black'); //NID
+}
+
 function darkTheme() {
   document.cookie='theme=dark';
   defaultTheme();
@@ -123,7 +152,7 @@ function defaultTheme() {
   changecss('.dropbtn', 'background-color', '#3498DB');
   changecss('span', 'color', 'black');
   changecss('input', 'background-color', 'white');
-  //Fix for Min Dark THeme
+  //Fix for Min Dark Theme
   chagecss('.userbtn', 'color', 'black');
   changecss('button', 'color', 'black')
   changecss('.msgSender', 'color', 'black');
@@ -131,4 +160,7 @@ function defaultTheme() {
   changecss('.msgSender input','color','black');
   changecss('.msgSender input','border','2px solid black');
   changecss('input','border','2px solid black');
+  //Fix for Min Lt Theme
+  changecss('.dropbtn', 'border', '');
+  changecss('.dropbtn', 'color', 'white');
 }
