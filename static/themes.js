@@ -47,7 +47,7 @@ function changecss(theClass, element, value) {
 //Making a new theme? Ask Fred18295 for some info first so you don't break anything
 function minimalLightTheme(){
   document.cookie='theme=minimalLight';
-  defaultTheme();
+  //defaultTheme();
   changecss('body','background-color','white');
   changecss('header','background-color', 'white');
   changecss('#menu', 'background-color', 'white');
@@ -76,7 +76,7 @@ function minimalLightTheme(){
 
 function darkTheme() {
   document.cookie='theme=dark';
-  defaultTheme();
+  //defaultTheme();
   changecss('body','background-color','rgb(13, 13, 13)');
   changecss('header','background-color', 'rgb(77, 77, 77)');
   changecss('#menu', 'background-color', 'rgb(77, 77, 77)');
@@ -94,7 +94,7 @@ function darkTheme() {
 }
 function minimalDarkTheme() {
   document.cookie='theme=minimalDark';
-  defaultTheme();
+  //defaultTheme();
   changecss('body','background-color','black');
   changecss('header','background-color', 'black');
   changecss('#menu', 'background-color', 'black');
@@ -120,7 +120,7 @@ function minimalDarkTheme() {
 }
 function painTheme() {
   document.cookie='theme=pain';
-  defaultTheme();
+  //defaultTheme();
   changecss('body','background-color','rgb(56, 16, 16)'); //
   changecss('header','background-color', 'rgb(136, 133, 0)'); //
   changecss('#menu', 'background-color', 'rgb(39, 97, 64)'); //
