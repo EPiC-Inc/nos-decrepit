@@ -100,7 +100,7 @@ function darkTheme() {
   changecss('span', 'color', 'white');
   changecss('input', 'background-color', 'rgb(128, 128, 128)');
   //Fix for Min Dark Theme
-  chagecss('.userbtn', 'color', 'black');
+  changecss('.userbtn', 'color', 'black');
   changecss('button', 'color', 'black')
   changecss('.msgSender', 'color', 'black');
   changecss('.userbtn', 'border', '2px solid black');
