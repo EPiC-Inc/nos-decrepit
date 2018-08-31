@@ -72,6 +72,14 @@ function minimalLightTheme(){
   changecss('.msgSender input','color','black'); //NID
   changecss('.msgSender input','border','2px solid black'); //NID
   changecss('input','border','2px solid black'); //NID
+  //Fix for Min Dark Theme
+  chagecss('.userbtn', 'color', 'black');
+  changecss('button', 'color', 'black')
+  changecss('.msgSender', 'color', 'black');
+  changecss('.userbtn', 'border', '2px solid black');
+  changecss('.msgSender input','color','black');
+  changecss('.msgSender input','border','2px solid black');
+  changecss('input','border','2px solid black');
 }
 
 function darkTheme() {
@@ -91,6 +99,17 @@ function darkTheme() {
   changecss('.dropbtn', 'background-color', 'rgb(140, 140, 140)');
   changecss('span', 'color', 'white');
   changecss('input', 'background-color', 'rgb(128, 128, 128)');
+  //Fix for Min Dark Theme
+  chagecss('.userbtn', 'color', 'black');
+  changecss('button', 'color', 'black')
+  changecss('.msgSender', 'color', 'black');
+  changecss('.userbtn', 'border', '2px solid black');
+  changecss('.msgSender input','color','black');
+  changecss('.msgSender input','border','2px solid black');
+  changecss('input','border','2px solid black');
+  //Fix for Min Lt Theme
+  changecss('.dropbtn', 'border', '');
+  changecss('.dropbtn', 'color', 'white');
 }
 function minimalDarkTheme() {
   document.cookie='theme=minimalDark';
@@ -117,6 +136,9 @@ function minimalDarkTheme() {
   changecss('.msgSender input','color','white'); //NID
   changecss('.msgSender input','border','2px solid white'); //NID
   changecss('input','border','2px solid white'); //NID
+  //Fix for Min Lt Theme
+  changecss('.dropbtn', 'border', '');
+  changecss('.dropbtn', 'color', 'white');
 }
 function painTheme() {
   document.cookie='theme=pain';
@@ -135,6 +157,17 @@ function painTheme() {
   changecss('.dropbtn', 'background-color', 'rgb(105, 255, 204)'); //
   changecss('span', 'color', 'white'); //
   changecss('input', 'background-color', 'rgb(153, 153, 102)'); //
+  //Fix for Min Dark Theme
+  chagecss('.userbtn', 'color', 'black');
+  changecss('button', 'color', 'black')
+  changecss('.msgSender', 'color', 'black');
+  changecss('.userbtn', 'border', '2px solid black');
+  changecss('.msgSender input','color','black');
+  changecss('.msgSender input','border','2px solid black');
+  changecss('input','border','2px solid black');
+  //Fix for Min Lt Theme
+  changecss('.dropbtn', 'border', '');
+  changecss('.dropbtn', 'color', 'white');
 }
 function defaultTheme() {
   document.cookie='theme=default';
