@@ -215,7 +215,7 @@ socket.on('users online', function(data){
   		}
   	}
   	if(!found) {
-    	users.innerHTML += '<br><div class="user"><button class="userbtn" onclick="m.value+=\'@'+data[i]+'\';menu()">'+data[i]+'</button></div>';
+    	users.innerHTML += '<br><div class="user"><button class="userbtn" onclick="m.value+=\'@'+data[i]+'\';closeNav()">'+data[i]+'</button></div>';
   		printed.push(data[i]);
   	}
   }
