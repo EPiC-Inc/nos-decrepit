@@ -1,7 +1,7 @@
 This is the plan for the new implementation.
 
 server.js
-commands.json
+commands.js
 config.json
 users.json
 rooms.json
