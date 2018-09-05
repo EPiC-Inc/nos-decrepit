@@ -1,0 +1,17 @@
+This is the plan for the new implementation.
+
+server.js
+commands.json
+static/
+- index.html
+- newacct.html
+- login.html
+- coms.html
+- js/
+--- index.ks
+--- newacct.js
+--- login.js
+--- chat.js
+- css/
+--- default.css
+--- dark.css
