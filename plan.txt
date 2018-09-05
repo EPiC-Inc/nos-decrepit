@@ -4,6 +4,7 @@ server.js
 commands.json
 config.json
 users.json
+rooms.json
 static/
 - index.html
 - newacct.html
