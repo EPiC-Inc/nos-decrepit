@@ -326,7 +326,8 @@ io.on('connection', function(socket){
         else if (command.getCommandID(cmd) == 103) {
           send = false;
           splitData = data.split(" ");
-          if (splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
+          if (splitData[1] && splitData[1].startsWith('@')) {splitData[1] = splitData[1].substr(1);}
+          else {splitData[1] = ''}
           online=false;
           recvid='';
           for (socketid in users){
