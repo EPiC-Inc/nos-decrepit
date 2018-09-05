@@ -255,7 +255,7 @@ socket.on("message", function(supadata){
 socket.on("disconnect", function(reason){
   if (online) {
     online = false;
-    $("#messages").append("<div>> Connection terminated. <</div>");
+    $("#messages").append("<div class='msg'>> Connection terminated. <</div>");
     window.scrollTo(0,document.body.scrollHeight);
   	changeIco('/static/disconnect.png');
     console.log(reason);
