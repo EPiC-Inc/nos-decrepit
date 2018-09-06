@@ -43,7 +43,6 @@ function changecss(theClass, element, value) {
 
 // theme setters are here as to not include junk in coms.html
 
-
 //Making a new theme? Ask Fred18295 for some info first so you don't break anything
 function minimalLightTheme(){
   document.cookie='theme=minimalLight';
