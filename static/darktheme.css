@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0px;
+  box-sizing: border-box
+}
+
+a {
+  transition-duration: 0.4s;
+  color: #00ccff;
+}
+
+div p {
+  display: inline;
+}
+
+a:hover {
+  color: darkcyan;
+  background: cyan;
+}
+
+.alert {
+  background: red;
+  font-size: 20px;
+}
+
+.announcement {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+}
+
+.announcement.success {background-color: #4CAF50;}
+.announcement.info {background-color: #2196F3;}
+.announcement.warning {background-color: #ff9800;}
+
+body {
+  font: 15px Roboto Mono, monospace;
+  background-color: rgb(13, 13, 13);
+}
+
+button {
+  background-color: rgb(140, 140, 140);
+  padding: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  border: 2px solid rgb(166, 166, 166);
+  transition-duration: .3s;
+  font-family: Roboto Mono, monospace;
+}
+
+button:hover {
+  background: darkcyan;
+  color: cyan;
+}
+
+.center {
+  width: 100%;
+  text-align: center;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+/* theme chooser dropdown */
+.dropbtn {
+   background-color: rgb(140, 140, 140);
+   color: white;
+   padding: 16px;
+   font-size: 16px;
+   border: none;
+   cursor: pointer;
+}
+.dropbtn:hover, .dropbtn:focus {
+   background-color: #2980B9
+}
+
+.dropdown {
+   position: relative;
+   display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+   display: none;
+   position: absolute;
+   background-color: #f1f1f1;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+   color: black;
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+h1, h2, h3, h4, h5, h6 {
+  padding-left: 10px;
+}
+h1 {
+  color: rgb(217, 217, 217);
+  padding: 5px;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  background-color: rgb(77, 77, 77);
+}
+
+header div {
+  float: left;
+  clear: none;
+  text-align: center;
+}
+
+header div button {
+  height: 50px;
+}
+
+header .right {
+  float: right;
+}
+
+input {
+  border: 2px solid black;
+  font-size: 18px;
+  font: 15px Roboto Mono, monospace;
+  background-color: rgb(128, 128, 128);
+}
+
+.infobox {
+  border-radius: 10px;
+  height: 30px;
+  width: 200px;
+}
+
+li {
+  font-size: 20px;
+  padding-left: 20px;
+  font: 15px Roboto Mono, monospace;
+}
+
+#menu {
+  background-color: rgb(77, 77, 77);
+  color: rgb(217, 217, 217);
+  max-width: 400px;
+  position: fixed;
+}
+
+#messages {
+  font-size: 10px;
+  width: 100%;
+  color: rgb(179, 179, 179);
+}
+
+.msgSender {
+  background-color: rgb(77, 77, 77);
+  padding: 3px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.msgSender input {
+  padding: 10px;
+  width: 90%;
+  margin-right: .5%;
+}
+
+.msgSender button {
+  width: 9%;
+  border: none;
+  padding: 10px;
+}
+
+.msg { /* make message different color than time sent */
+  color: rgb(191, 191, 191);
+  font-size: 20px;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+span {
+  color: white;
+}
+
+table {
+  width: 100%;
+}
+
+.user {
+    position: relative;
+    display: inline-block;
+    color: black;
+}
+
+.user .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    position: absolute;
+    padding: 5px 0;
+    z-index: 1;
+    top: 5px;
+    left: 100%;
+}
+.user:hover .tooltiptext {
+    visibility: visible;
+}
+
+.userbtn {
+  background-color:rgb(140, 140, 140);
+  border:none;
+  font-size:15px;
+}
