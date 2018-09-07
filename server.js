@@ -425,7 +425,7 @@ io.on('connection', function(socket){
         if(users[socket.id] !== undefined) {
           msg = Buffer.from(packet).toString('base64');
           io.to(users[socket.id].room).emit('message', [datetimestring, msg]);
-          if (users[socket.id].room == 'lobby') {
+          if (users[socket.id] && users[socket.id].room == 'lobby') {
             saveMessage([datetimestring, msg]);
           }
         }
