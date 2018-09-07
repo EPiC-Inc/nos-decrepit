@@ -13,14 +13,15 @@
 
 <body>
   <header>
-    <div><button id='menuBtn' onclick="menu()" style="width:50px;height:50px;">Ξ</button></div>
+    <div><button id='menuBtn' onclick="openNav()" style="width:50px;height:50px;">Ξ</button></div>
     <div><h1 id='roomName'>401 - Please log in!</h1></div>
     <div class='right'><a href='./login.html'><button id='login'>Log in</button></a></div>
     <div class='right'><button hidden='true' id='logout' onclick='logout()'>Log out</button></div>
   </header>
   <div style='height:50px;'></div>
 
-  <div id='menu' hidden>
+  <div id="menu" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <form onsubmit='return false'>
       <input style="width:100px;" id='roomSelect' />
       <button style='font-size:15px;' onclick="changeRoom()">Change room</button>
@@ -52,7 +53,17 @@
     </form>
     <!--<button style='height:50px;width:50px;font-size:25px;'>+</button>-->
   </div>
-  <div style='height:50px;'></div>
+  <div style='height:60px;'></div>
 </body>
   <script src='/static/chat.js'></script>
 </html>
+<script>
+function openNav() {
+  document.getElementById("menu").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+ function closeNav() {
+  document.getElementById("menu").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+ </script>
