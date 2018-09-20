@@ -378,7 +378,7 @@ io.on('connection', function(socket){
           send = false;
           splitData = data.split(" ");
           var packet = "<span style='background:cyan;'>> "+splitData[1]+" has been turned into a llama by "+senderName+"!</span>";
-          io.emit("message", [datetimestring, Buffer.from(packet).toString('base64')]);
+          io.to(users[socket.id].room).emit("message", [datetimestring, Buffer.from(packet).toString('base64')]);
         }
         // img command
         else if (command.getCommandID(cmd) == 104) {
