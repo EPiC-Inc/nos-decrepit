@@ -201,6 +201,7 @@ li {
 .msg { /* make message different color than time sent */
   color: black;
   font-size: 20px;
+  word-break: break-all;
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
