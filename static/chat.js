@@ -252,6 +252,10 @@ socket.on("message", function(supadata){
   }
 });
 
+socket.on('timer', function(data){
+  document.getElementById('countdown').innerHTML = data;
+});
+
 socket.on("disconnect", function(reason){
   if (online) {
     online = false;
