@@ -486,6 +486,13 @@ io.on('connection', function(socket){
   });
 });
 
+var countdown = 864000;  
+setInterval(function() {  
+  countdown--;
+  io.emit('timer', countdown);
+}, 1000);
+
+
 stdin.addListener("data", function(d) {
   datetimestring = toLocalTime().toLocaleString() ///datetime
   packet = "<span style='background:cyan;'><span class='alert'>SERVER ALERT</span> > "+d.toString().trim()+"</span>";
